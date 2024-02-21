@@ -1,8 +1,20 @@
+// npm install @mui/material @emotion/react @emotion/styled
+// npm install @mui/material-nextjs @emotion/cache
+// npm install stylis stylis-plugin-rtl
+// npm i --save-dev @types/stylis
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
+import { MuiRtlAndAppRouterCacheProvider } from "./MuiRtl&Cache";
+import MuiCustomThemeProvider from "./MuiCustomeThemeProvider";
+import localFont from "next/font/local";
 
-const inter = Inter({ subsets: ["latin"] });
+// this is the way of importing a local font
+const IranSansWeb = localFont({
+  src: "../public/fonts/teqh_iransansweb.ttf",
+  variable: "--font-IranSansWeb",
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html dir="rtl">
+      <body className={IranSansWeb.variable}>
+        <MuiCustomThemeProvider>
+          <MuiRtlAndAppRouterCacheProvider>
+            {children}
+          </MuiRtlAndAppRouterCacheProvider>
+        </MuiCustomThemeProvider>
+      </body>
     </html>
   );
 }
