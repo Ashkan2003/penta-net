@@ -8,13 +8,16 @@ import "./globals.css";
 import { MuiRtlAndAppRouterCacheProvider } from "./MuiRtl&Cache";
 import MuiCustomThemeProvider from "./MuiCustomeThemeProvider";
 import localFont from "next/font/local";
+import Header from "./Header";
+import Navbar from "./Navbar";
+import { Box, Toolbar, Typography } from "@mui/material";
+import SideBar from "./SideBar";
 
 // this is the way of importing a local font
 const IranSansWeb = localFont({
   src: "../public/fonts/teqh_iransansweb.ttf",
   variable: "--font-IranSansWeb",
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,9 +32,25 @@ export default function RootLayout({
   return (
     <html dir="rtl">
       <body className={IranSansWeb.variable}>
+        {/* this is for custom mui theme */}
         <MuiCustomThemeProvider>
+          {/* this is for mui-rtl and catch-provider */}
           <MuiRtlAndAppRouterCacheProvider>
-            {children}
+            <Box sx={{ display: "flex" }}>
+              <SideBar />
+              <Header />
+              <Box
+                component="main"
+                sx={{
+                  flexGrow: 1,
+                  p: 1,
+                  width: { sm: `calc(100% - ${240}px)` },
+                }}
+              >
+                <Toolbar />
+                {children}
+              </Box>
+            </Box>
           </MuiRtlAndAppRouterCacheProvider>
         </MuiCustomThemeProvider>
       </body>
