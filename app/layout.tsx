@@ -2,16 +2,16 @@
 // npm install @mui/material-nextjs @emotion/cache
 // npm install stylis stylis-plugin-rtl
 // npm i --save-dev @types/stylis
+// npm install zustand for global state managment
+
+import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
-import "./globals.css";
-import { MuiRtlAndAppRouterCacheProvider } from "./MuiRtl&Cache";
-import MuiCustomThemeProvider from "./MuiCustomeThemeProvider";
 import localFont from "next/font/local";
 import Header from "./Header";
-import Navbar from "./Navbar";
-import { Box, Toolbar, Typography } from "@mui/material";
+import MuiCustomThemeProvider from "./MuiCustomeThemeProvider";
+import { MuiRtlAndAppRouterCacheProvider } from "./MuiRtl&Cache";
 import SideBar from "./SideBar";
+import "./globals.css";
 
 // this is the way of importing a local font
 const IranSansWeb = localFont({
