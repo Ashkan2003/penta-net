@@ -1,6 +1,4 @@
 "use client";
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
@@ -19,61 +17,97 @@ import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import HistoryIcon from "@mui/icons-material/History";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Link from "next/link";
+
 const drawerWidth = 240;
 
 const menuListArray: { title: string; icon: any }[] = [
   {
-    title: "دیده بان کلاسیک",
-    icon: <HomeIcon fontSize="small" sx={{ color: "#CCEA8E" }} />,
+    title: "خانه",
+    icon: <HomeIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "دیده بان تکنیکال",
-    icon: <WhatshotIcon fontSize="small" sx={{ color: "#CCEA8E" }} />,
+    title: "ترندها",
+    icon: <WhatshotIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "نقشه بازار",
-    icon: <EventNoteIcon fontSize="small" sx={{ color: "#CCEA8E" }} />,
+    title: "جدول پخش",
+    icon: <EventNoteIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "اوراق بدهی",
-    icon: <FilterAltIcon fontSize="small" sx={{ color: "#CCEA8E" }} />,
+    title: "دسته بندی ها",
+    icon: <FilterAltIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+];
+
+const menuListArray2: { title: string; icon: any }[] = [
+  {
+    title: "تاریخچه",
+    icon: <HistoryIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+  {
+    title: "ذخیره شده ها",
+    icon: <BookmarkIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+  {
+    title: "کالکشن ها",
+    icon: (
+      <CollectionsBookmarkIcon
+        fontSize="small"
+        sx={{ color: "success.main" }}
+      />
+    ),
+  },
+  {
+    title: "دانلود ها",
+    icon: <SaveAltIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+];
+
+const menuListArray3: { title: string; icon: any }[] = [
+  {
+    title: "تنظیمات",
+    icon: <SettingsIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+  {
+    title: "پروفایل",
+    icon: <AccountCircleIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
 ];
 
 export default function SideBar() {
+  const [selectedIndex, setSelectedIndex] = React.useState(1); // the current selected watch from the list
+
   // get this from zustand
   const isDrawerOpen = useBoundStore((state) => state.isDrawerOpen);
   const handleDrawerTogglerSet = useBoundStore(
     (state) => state.handleDrawerTogglerSet
   );
 
-  // const { window } = props;
-  // const [mobileOpen, setMobileOpen] = React.useState(false);
-  // const [isClosing, setIsClosing] = React.useState(false);
-
   const handleDrawerClose = () => {
-    // setIsClosing(true);
-    // setMobileOpen(false);
     handleDrawerTogglerSet(false);
   };
 
-  // const handleDrawerTransitionEnd = () => {
-  //   setIsClosing(false);
-  // };
-
-  // const handleDrawerToggle = () => {
-  //   if (!isClosing) {
-  //     setMobileOpen(!mobileOpen);
-  //   }
-  // };
+  // this function is for activating the selected watch by adding some style
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    setSelectedIndex(index);
+    handleDrawerClose();
+  };
 
   const drawer = (
     <Stack
-      sx={
-        {
-          // bgcolor: "primary.main",
-        }
-      }
+      sx={{
+        color: "primary.light",
+      }}
     >
       <Toolbar sx={{ bgcolor: "primary.main", paddingLeft: "6px" }}>
         <Image src="/logo.png" width={40} height={10} alt="logo" />
@@ -85,35 +119,56 @@ export default function SideBar() {
       </Toolbar>
       <Divider sx={{ bgcolor: "#827d7d" }} />
       <List>
-        {menuListArray.map((item) => (
-          <ListItem key={item.title} sx={{ padding: 0 }} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ minWidth: "30px" }}>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
+        {menuListArray.map((item, index) => (
+          <Link href="/admin" key={item.title}>
+            <ListItem sx={{ padding: 0 }} disablePadding>
+              <ListItemButton
+                className={` ${selectedIndex === index && "!text-red-600"}`}
+                // selected={selectedIndex === index}
+                onClick={(event) => handleListItemClick(event, index)}
+              >
+                <ListItemIcon sx={{ minWidth: "30px" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
-        <Divider variant="middle" sx={{ bgcolor: "#CCEA8E" }} />
       </List>
-      <Divider />
+      <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {menuListArray2.map((item) => (
+          <Link href="/admin" key={item.title}>
+            <ListItem sx={{ padding: 0 }} disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ minWidth: "30px" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
+      <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
+      <List>
+        {menuListArray3.map((item) => (
+          <Link href="/admin" key={item.title}>
+            <ListItem sx={{ padding: 0 }} disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ minWidth: "30px" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+      <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
     </Stack>
   );
-
-  // Remove this const when copying and pasting into your project.
-  // const container =
-  //   window !== undefined ? () => window().document.body : undefined;
 
   return (
     <>
@@ -127,13 +182,11 @@ export default function SideBar() {
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
-          // container={container}
           variant="temporary"
           PaperProps={{
             sx: { bgcolor: "primary.main" },
           }}
           open={isDrawerOpen}
-          // onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
