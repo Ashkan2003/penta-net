@@ -10,7 +10,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
-import { useBoundStore } from "./zustand/store";
 import Image from "next/image";
 import { Stack, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -24,6 +23,7 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
+import { useBoundStore } from "@/zustand/store";
 
 const drawerWidth = 240;
 
@@ -121,10 +121,15 @@ export default function SideBar() {
       <List>
         {menuListArray.map((item, index) => (
           <Link href="/admin" key={item.title}>
-            <ListItem sx={{ padding: 0 }} disablePadding>
+            <ListItem
+              className={` ${
+                selectedIndex === index &&
+                "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
+              }`}
+              sx={{ padding: 0 }}
+              disablePadding
+            >
               <ListItemButton
-                className={` ${selectedIndex === index && "!text-red-600"}`}
-                // selected={selectedIndex === index}
                 onClick={(event) => handleListItemClick(event, index)}
               >
                 <ListItemIcon sx={{ minWidth: "30px" }}>

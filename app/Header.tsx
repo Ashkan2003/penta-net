@@ -1,14 +1,22 @@
 "use client";
-import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Box,
+  Divider,
+} from "@mui/material";
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useBoundStore } from "./zustand/store";
+import { useBoundStore } from "@/zustand/store";
+import AutoCompleteBox from "./AutoCompleteBox";
+import HeaderIcons from "./HeaderIcons";
 
 const Header = () => {
   const handleDrawerToggle = useBoundStore(
     (state) => state.handleDrawerToggler
   );
-
 
   return (
     <AppBar
@@ -18,20 +26,24 @@ const Header = () => {
         ml: { sm: `${240}px` },
       }}
     >
-      <Toolbar>
+      <Toolbar
+        sx={{
+          justifyContent: "space-between",
+        }}
+      >
+        {/* the menu icon */}
         <IconButton
           color="inherit"
-          aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
+          sx={{ mr: 1, display: { sm: "none" } }}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          Responsive drawer
-        </Typography>
-        
+        {/* the search box */}
+        <AutoCompleteBox />
+        {/* the header icons list */}
+        <HeaderIcons />
       </Toolbar>
     </AppBar>
   );

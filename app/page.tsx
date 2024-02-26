@@ -1,4 +1,3 @@
-"use client";
 import {
   ButtonGroup,
   Button,
@@ -6,22 +5,17 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { useBoundStore } from "./zustand/store";
 export default function Home() {
-  const bearCount = useBoundStore((state) => (state.bears = 1));
-  const addbearCount = useBoundStore((state) => state.addBear);
-  const fishCount = useBoundStore((state) => state.fishes);
-  const addfishCount = useBoundStore((state) => state.addFishes);
-
+ 
   return (
     <div>
-      <Autocomplete
+      {/* <Autocomplete
         disablePortal
         id="combo-box-demo"
         options={top100Films}
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Movie" />}
-      />
+      /> */}
       <ButtonGroup variant="contained" aria-label="Basic button group">
         <Button>One</Button>
         <Button>Two</Button>
@@ -31,14 +25,7 @@ export default function Home() {
       <p>دیده بان کلاسیک</p>
       <Typography>دیده بان کلاسیک</Typography>
       <Typography>دیده بان کلاسیک</Typography>
-      <p>{bearCount}</p>
-      <Button variant="contained" onClick={addbearCount}>
-        bear
-      </Button>
-      <p>{fishCount}</p>
-      <Button variant="contained" onClick={addfishCount}>
-        fish
-      </Button>
+      
     </div>
   );
 }
