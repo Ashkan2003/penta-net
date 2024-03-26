@@ -44,7 +44,7 @@ export default function RootLayout({
                 component="main"
                 sx={{
                   flexGrow: 1,
-                  width: { sm: `calc(100% - ${240}px)` },
+                  width: { md: `calc(100% - ${240}px)` },
                 }}
               >
                 <Toolbar />

@@ -186,8 +186,8 @@ export default function SideBar() {
       <Box
         component="nav"
         sx={{
-          width: { sm: drawerWidth },
-          flexShrink: { sm: 0 },
+          width: { md: drawerWidth },
+          flexShrink: { md: 0 },
         }}
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -202,7 +202,7 @@ export default function SideBar() {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -218,7 +218,7 @@ export default function SideBar() {
             sx: { bgcolor: "primary.main" },
           }}
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

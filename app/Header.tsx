@@ -20,8 +20,8 @@ const Header = () => {
     <AppBar
       // position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${240}px)` },
-        ml: { sm: `${240}px` },
+        width: { md: `calc(100% - ${240}px)` },
+        ml: { md: `${240}px` },
       }}
     >
       <Toolbar
@@ -34,7 +34,7 @@ const Header = () => {
           color="inherit"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ mr: 1, display: { sm: "none" } }}
+          sx={{ mr: 1, display: { md: "none" } }}
         >
           <MenuIcon />
         </IconButton>

@@ -9,14 +9,16 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <div className="relative overflow-hidden w-[1500px] h-[600px]">
+      <div className="relative overflow-hidden h-[400px] sm:h-[600px] ">
         <Image
           src="/shogun.jpg"
           alt="poster"
           fill
-          className="absolute w-full h-full  bg-gradient-to-br from-[#00000000] to-[#000000d5] "
+          // width={1500}
+          // height={600}
+          className="z-0 absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
         />
-        <div className="absolute w-full h-full bg-gradient-to-br from-[#00000000] to-[#000000d5] " />
+        <div className="absolute z-10 w-full h-full bg-gradient-to-br from-[#00000000] to-[#000000d5] " />
       </div>
       <ButtonGroup variant="contained" aria-label="Basic button group">
         <Button>One</Button>
