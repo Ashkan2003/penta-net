@@ -3,7 +3,8 @@
 // npm install stylis stylis-plugin-rtl
 // npm i --save-dev @types/stylis
 // npm install zustand for global state managment
-
+// npx -y next-video init
+// npm install axios
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -43,12 +44,11 @@ export default function RootLayout({
                 component="main"
                 sx={{
                   flexGrow: 1,
-                  p: 1,
                   width: { sm: `calc(100% - ${240}px)` },
                 }}
               >
                 <Toolbar />
-                {children}
+                <main className="bg-[#1E2027] p- h-[91.33vh]">{children}</main>
               </Box>
             </Box>
           </MuiRtlAndAppRouterCacheProvider>

@@ -27,21 +27,26 @@ import { useBoundStore } from "@/zustand/store";
 
 const drawerWidth = 240;
 
-const menuListArray: { title: string; icon: any }[] = [
+const menuListArray: { title: string; href: string; icon: any }[] = [
   {
     title: "خانه",
+    href: "/",
     icon: <HomeIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "ترندها",
+    href: "/admin",
     icon: <WhatshotIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "جدول پخش",
+    href: "/admin",
+
     icon: <EventNoteIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "دسته بندی ها",
+    href: "/admin",
     icon: <FilterAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
 ];
@@ -120,7 +125,7 @@ export default function SideBar() {
       <Divider sx={{ bgcolor: "#827d7d" }} />
       <List>
         {menuListArray.map((item, index) => (
-          <Link href="/admin" key={item.title}>
+          <Link href={item.href} key={item.title}>
             <ListItem
               className={` ${
                 selectedIndex === index &&

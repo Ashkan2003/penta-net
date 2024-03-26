@@ -5,17 +5,19 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
+import Image from "next/image";
 export default function Home() {
- 
   return (
     <div>
-      {/* <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={top100Films}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Movie" />}
-      /> */}
+      <div className="relative overflow-hidden w-[1500px] h-[600px]">
+        <Image
+          src="/shogun.jpg"
+          alt="poster"
+          fill
+          className="absolute w-full h-full  bg-gradient-to-br from-[#00000000] to-[#000000d5] "
+        />
+        <div className="absolute w-full h-full bg-gradient-to-br from-[#00000000] to-[#000000d5] " />
+      </div>
       <ButtonGroup variant="contained" aria-label="Basic button group">
         <Button>One</Button>
         <Button>Two</Button>
@@ -25,7 +27,6 @@ export default function Home() {
       <p>دیده بان کلاسیک</p>
       <Typography>دیده بان کلاسیک</Typography>
       <Typography>دیده بان کلاسیک</Typography>
-      
     </div>
   );
 }

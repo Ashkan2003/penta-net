@@ -3,8 +3,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
-  Box,
   Divider,
 } from "@mui/material";
 import React from "react";
@@ -45,6 +43,7 @@ const Header = () => {
         {/* the header icons list */}
         <HeaderIcons />
       </Toolbar>
+      <Divider sx={{ bgcolor: "#827d7d" }} />
     </AppBar>
   );
 };
