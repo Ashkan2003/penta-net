@@ -61,7 +61,7 @@ const menuListArray2: { title: string; icon: any }[] = [
     icon: <BookmarkIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "کالکشن ها",
+    title: "لیست های من",
     icon: (
       <CollectionsBookmarkIcon
         fontSize="small"

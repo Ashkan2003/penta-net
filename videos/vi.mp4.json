@@ -1,0 +1,11 @@
+{
+  "status": "processing",
+  "originalFilePath": "videos/vi.mp4",
+  "provider": "mux",
+  "providerMetadata": {
+    "mux": { "uploadId": "02OAb9jHOufvZQijq01j6Be00wo02IMV66SjzgZ6g2cSl6o" }
+  },
+  "createdAt": 1711446178301,
+  "updatedAt": 1711446187039,
+  "size": 301593
+}

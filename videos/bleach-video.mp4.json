@@ -1,0 +1,11 @@
+{
+  "status": "uploading",
+  "originalFilePath": "videos/bleach-video.mp4",
+  "provider": "mux",
+  "providerMetadata": {
+    "mux": { "uploadId": "93AHbzpqJ02bQB4rceGKVFfdRHIOFIhw02vSdy02eXJmOU" }
+  },
+  "createdAt": 1711445608844,
+  "updatedAt": 1711527758202,
+  "size": 35789399
+}
