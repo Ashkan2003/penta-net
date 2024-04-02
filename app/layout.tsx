@@ -10,13 +10,13 @@
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Header from "./Header";
-import MuiCustomThemeProvider from "./MuiCustomeThemeProvider";
-import { MuiRtlAndAppRouterCacheProvider } from "./MuiRtl&Cache";
-import SideBar from "./SideBar";
+import Header from "./components/layout/Header";
+import MuiCustomThemeProvider from "./providers/MuiCustomeThemeProvider";
+import { MuiRtlAndAppRouterCacheProvider } from "./providers/MuiRtl&Cache";
+import SideBar from "./components/layout/SideBar";
 import "./globals.css";
-import ReactQueryProvider from "./QueryClientProvider";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import ReactQueryProvider from "./providers/QueryClientProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 // this is the way of importing a local font
 const IranSansWeb = localFont({
   src: "../public/fonts/teqh_iransansweb.ttf",

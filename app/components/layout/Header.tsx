@@ -1,10 +1,5 @@
 "use client";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Divider,
-} from "@mui/material";
+import { AppBar, Toolbar, IconButton, Divider } from "@mui/material";
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useBoundStore } from "@/zustand/store";

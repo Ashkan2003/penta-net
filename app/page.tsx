@@ -6,12 +6,12 @@ import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import RoundedBtn from "@/components/RoundedBtn";
+import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useMovies } from "@/reactQuery/movies/useMovies";
+import { useMovies } from "@/app/react-query/movie/useMovies";
 
 export default function Home() {
   /////////////////////////////////
