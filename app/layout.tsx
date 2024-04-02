@@ -5,6 +5,8 @@
 // npm install zustand for global state managment
 // npx -y next-video init
 // npm install axios
+// npm i @tanstack/react-query
+// npm i @tanstack/react-query-devtools
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -13,7 +15,8 @@ import MuiCustomThemeProvider from "./MuiCustomeThemeProvider";
 import { MuiRtlAndAppRouterCacheProvider } from "./MuiRtl&Cache";
 import SideBar from "./SideBar";
 import "./globals.css";
-
+import ReactQueryProvider from "./QueryClientProvider";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 // this is the way of importing a local font
 const IranSansWeb = localFont({
   src: "../public/fonts/teqh_iransansweb.ttf",
@@ -37,20 +40,25 @@ export default function RootLayout({
         <MuiCustomThemeProvider>
           {/* this is for mui-rtl and catch-provider */}
           <MuiRtlAndAppRouterCacheProvider>
-            <Box sx={{ display: "flex" }}>
-              <SideBar />
-              <Header />
-              <Box
-                component="main"
-                sx={{
-                  flexGrow: 1,
-                  width: { md: `calc(100% - ${240}px)` },
-                }}
-              >
-                <Toolbar />
-                <main className="bg-[#1E2027] p- h-[91.33vh]">{children}</main>
+            <ReactQueryProvider>
+              <Box sx={{ display: "flex" }}>
+                <SideBar />
+                <Header />
+                <Box
+                  component="main"
+                  sx={{
+                    flexGrow: 1,
+                    width: { md: `calc(100% - ${240}px)` },
+                  }}
+                >
+                  <Toolbar />
+                  <main className="bg-[#1E2027] p- h-[91.33vh]">
+                    {children}
+                  </main>
+                </Box>
               </Box>
-            </Box>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </ReactQueryProvider>
           </MuiRtlAndAppRouterCacheProvider>
         </MuiCustomThemeProvider>
       </body>

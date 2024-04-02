@@ -1,3 +1,4 @@
+"use client";
 import { ButtonGroup, Button, Typography, IconButton } from "@mui/material";
 import Image from "next/image";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -8,17 +9,27 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RoundedBtn from "@/components/RoundedBtn";
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useMovies } from "@/reactQuery/movies/useMovies";
+
 export default function Home() {
+  /////////////////////////////////
+  const { error, isLoadingMovies, data } = useMovies();
+  if (isLoadingMovies) return null;
+  console.log(data);
+
+  ////////////////////////////////
   return (
     <div className="bg-[#121212] h-[100vh]">
       <div className="relative overflow-hidden h-[350px] sm:h-[500px] md:h-[550px] ">
         <Image
           className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
-          src="/bleach.jpg"
+          // src="https://image.tmdb.org/t/p/original/5zmiBoMzeeVdQ62no55JOJMY498.jpg"
+          src={`https://image.tmdb.org/t/p/original${data?.backdrop_path!}`}
           alt="poster"
           fill
-          // width={1500}
-          // height={600}
+          unoptimized
         />
         <div className="absolute w-full h-full bg-gradient-to-b from-[#ffffff00] to-[#121212] " />
         <div className="absolute p-5 flex flex-col gap-6 text-white">
@@ -27,12 +38,12 @@ export default function Home() {
           {/* the film title */}
           <p className="text-[20px]">بلیچ: جنگ خونین هزار ساله</p>
           {/* the film info */}
-          <div className="flex justify-between w-[500px]">
-            <span className="px-2 py-1 text-sm font-bold  rounded-2xl text-black ra  bg-gradient-to-b  from-[#f69067] to-[#f95a1b]">
+          <div className="flex text-[14px] justify-between items-center w-[500px]">
+            <span className="px-2 py-1 font-bold text-[12px]  rounded-2xl text-black   bg-gradient-to-b  from-[#f69067] to-[#f95a1b]">
               15+
             </span>
-            <span>2022</span>
-            <div className="flex">
+            <span className="font-bold pt-1">2022</span>
+            <div className="flex pt-1">
               <span className="font-bold pe-2">IMDB</span>
               <p>9</p>
             </div>
@@ -77,7 +88,9 @@ export default function Home() {
               ستارگان: Masakazu MoritaYuki MatsuokaHiroki YasumotoNoriaki
               Sugiyama
             </Typography>
-            <Typography fontSize={12} color="primary.light">کارگردان: Tomohisa Taguchi</Typography>
+            <Typography fontSize={12} color="primary.light">
+              کارگردان: Tomohisa Taguchi
+            </Typography>
           </div>
         </div>
       </div>
