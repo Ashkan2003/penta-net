@@ -41,7 +41,7 @@ export default function RootLayout({
           {/* this is for mui-rtl and catch-provider */}
           <MuiRtlAndAppRouterCacheProvider>
             <ReactQueryProvider>
-              <Box sx={{ display: "flex" }}>
+              <Box sx={{ display: "flex",bgcolor:"#1E2027" }}>
                 <SideBar />
                 <Header />
                 <Box
@@ -52,12 +52,12 @@ export default function RootLayout({
                   }}
                 >
                   <Toolbar />
-                  <main className="bg-[#1E2027] p- h-[91.33vh]">
+                  <main className="bg-[#1E2027]">
                     {children}
                   </main>
                 </Box>
               </Box>
-              <ReactQueryDevtools initialIsOpen={false} />
+              <ReactQueryDevtools position="left" initialIsOpen={false} />
             </ReactQueryProvider>
           </MuiRtlAndAppRouterCacheProvider>
         </MuiCustomThemeProvider>

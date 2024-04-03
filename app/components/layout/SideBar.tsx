@@ -35,7 +35,7 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
   },
   {
     title: "ترندها",
-    href: "/admin",
+    href: "/popular-movies",
     icon: <WhatshotIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {

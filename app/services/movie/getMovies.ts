@@ -6,7 +6,7 @@ export async function getMovies() {
     method: "GET",
     url: "https://api.themoviedb.org/3/search/movie",
     params: {
-      query: "shogun",
+      query: "Dune",
       include_adult: "false",
       language: "en-US",
       page: "1",
@@ -21,11 +21,9 @@ export async function getMovies() {
   const data = await axios
     .request(options)
     .then((res) => {
-      return res.data.results[0];
+      return res.data.results[2];
     })
     .catch((err) => console.error(err));
 
   return data;
 }
-
-

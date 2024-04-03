@@ -1,4 +1,4 @@
-import { getMovies } from "@/app/services/getMovies";
+import { getMovies } from "@/app/services/movie/getMovies";
 import { useQuery } from "@tanstack/react-query";
 
 export const useMovies = () => {

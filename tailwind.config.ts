@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+const defaultTheme = require('tailwindcss/defaultTheme')
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,6 +7,10 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens:{
+      "xs":"400px",
+      ...defaultTheme.screens,
+    },
     extend: {
       fontFamily: {
         // change the defult font of tailwind by setting it to "sans". becus the tailwind uses "sans" as its defualt font-family

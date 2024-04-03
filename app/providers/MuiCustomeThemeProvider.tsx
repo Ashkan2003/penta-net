@@ -17,6 +17,10 @@ const theme = createTheme({
     success: {
       main: "#FA8A5D",
     },
+    text: {
+      primary: "#ffffff",
+      secondary: "#BDC0C3",
+    },
   },
 });
 
