@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html dir="rtl">
+    <html dir="rtl" className="bg-[#1E2027]">
       <body className={IranSansWeb.variable}>
         {/* this is for custom mui theme */}
         <MuiCustomThemeProvider>

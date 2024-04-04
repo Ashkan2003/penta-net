@@ -1,32 +1,45 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Stack } from "@mui/material";
+import { CardActionArea, CircularProgress, Stack } from "@mui/material";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
+import { movieType } from "@/app/types/movieTypes";
 
-export default function MovieCard() {
+interface Props {
+  movie: movieType;
+}
+
+export default function MovieCard({ movie }: Props) {
+  const movieImdbRate = Math.round(movie.vote_average * 10) / 10;
+  const movieReleaseDate = movie.release_date.slice(0, 4);
+  const moviePopularityPercent = Math.round(movie.popularity)
+    .toString()
+    .slice(0, 2);
+
   return (
     <Card className="group relative" sx={{ maxWidth: 300, bgcolor: "#1E2027" }}>
       <CardActionArea>
         <Image
           className="group-hover:brightness-50 transition-all duration-300 hover:duration-300"
-          src="/panda.webp"
+          src={`https://image.tmdb.org/t/p/original${movie.poster_path!}`}
+          unoptimized // this is nesesary for not nextjs complane aboat site
           alt="movie-pic"
           width={250}
           height={200}
         />
+
         <div className="group-hover:block  hidden absolute bottom-24 right-[8px]">
           <div className="flex flex-col text-[14px] gap-2">
             <div className="flex pt-1">
               <span className="font-bold pe-2">IMDB</span>
-              <p className="font-bold">9</p>
+              <p className="font-bold">{movieImdbRate}</p>
             </div>
             <div className="flex gap-1 items-center">
               <FavoriteIcon />
-              <span className="font-bold">90%</span>
+              <span className="font-bold">{moviePopularityPercent}%</span>
             </div>
             <div className="flex gap-1 items-center">
               <WysiwygRoundedIcon />
@@ -60,14 +73,14 @@ export default function MovieCard() {
                 10/
               </Typography>
               <Typography color="text.primary" fontSize={14} fontWeight="bold">
-                7.09
+                {movieImdbRate}
               </Typography>
               <StarRateRoundedIcon
                 sx={{ color: "yellow", marginBottom: "6px" }}
               />
             </Stack>
             <Typography fontSize={14} fontWeight="bold" color="text.secondary">
-              2023
+              {movieReleaseDate}
             </Typography>
           </Stack>
         </CardContent>
