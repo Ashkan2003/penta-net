@@ -7,6 +7,7 @@
 // npm install axios
 // npm i @tanstack/react-query
 // npm i @tanstack/react-query-devtools
+// npm i react-hot-toast
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -17,6 +18,7 @@ import SideBar from "./components/layout/SideBar";
 import "./globals.css";
 import ReactQueryProvider from "./providers/QueryClientProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from 'react-hot-toast';
 // this is the way of importing a local font
 const IranSansWeb = localFont({
   src: "../public/fonts/teqh_iransansweb.ttf",
@@ -57,6 +59,7 @@ export default function RootLayout({
                   </main>
                 </Box>
               </Box>
+              <Toaster />
               <ReactQueryDevtools position="left" initialIsOpen={false} />
             </ReactQueryProvider>
           </MuiRtlAndAppRouterCacheProvider>

@@ -1,7 +1,12 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CircularProgress, Stack } from "@mui/material";
+import {
+  CardActionArea,
+  CardMedia,
+  CircularProgress,
+  Stack,
+} from "@mui/material";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -20,16 +25,22 @@ export default function MovieCard({ movie }: Props) {
     .slice(0, 2);
 
   return (
-    <Card className="group relative" sx={{ maxWidth: 300, bgcolor: "#1E2027" }}>
+    <Card className="group relative" sx={{ bgcolor: "#1E2027" }}>
       <CardActionArea>
-        <Image
-          className="group-hover:brightness-50 transition-all duration-300 hover:duration-300"
-          src={`https://image.tmdb.org/t/p/original${movie.poster_path!}`}
-          unoptimized // this is nesesary for not nextjs complane aboat site
-          alt="movie-pic"
-          width={250}
-          height={200}
-        />
+        <CardMedia
+          sx={{ position: "relative", Width:200 }}
+        >
+          <Image
+            className="group-hover:brightness-50 transition-all duration-300 hover:duration-300"
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path!}`}
+            unoptimized // this is nesesary for not nextjs complane aboat site
+            alt="movie-pic"
+            width={250}
+            height={200}
+            // fill
+            // style={{ objectFit: "contain" }}
+          />
+        </CardMedia>
 
         <div className="group-hover:block  hidden absolute bottom-24 right-[8px]">
           <div className="flex flex-col text-[14px] gap-2">
