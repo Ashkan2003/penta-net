@@ -11,25 +11,29 @@ import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
-import { movieType } from "@/app/types/movieTypes";
+import { useRouter } from "next/navigation";
+import { movieListType } from "@/app/types/movieTypes";
 
 interface Props {
-  movie: movieType;
+  movie: movieListType;
 }
 
 export default function MovieCard({ movie }: Props) {
+  const router = useRouter();
   const movieImdbRate = Math.round(movie.vote_average * 10) / 10;
   const movieReleaseDate = movie.release_date.slice(0, 4);
   const moviePopularityPercent = Math.round(movie.popularity)
     .toString()
     .slice(0, 2);
 
+  const handleMovieClick = () => {
+    router.push(`/movie/${movie.id}`);
+  };
+
   return (
     <Card className="group relative" sx={{ bgcolor: "#1E2027" }}>
-      <CardActionArea>
-        <CardMedia
-          sx={{ position: "relative", Width:200 }}
-        >
+      <CardActionArea onClick={handleMovieClick}>
+        <CardMedia sx={{ position: "relative", Width: 200 }}>
           <Image
             className="group-hover:brightness-50 transition-all duration-300 hover:duration-300"
             src={`https://image.tmdb.org/t/p/original${movie.poster_path!}`}
@@ -41,7 +45,6 @@ export default function MovieCard({ movie }: Props) {
             // style={{ objectFit: "contain" }}
           />
         </CardMedia>
-
         <div className="group-hover:block  hidden absolute bottom-24 right-[8px]">
           <div className="flex flex-col text-[14px] gap-2">
             <div className="flex pt-1">
@@ -62,13 +65,14 @@ export default function MovieCard({ movie }: Props) {
           sx={{ paddingX: "7px", paddingY: "10px", paddingBottom: "4px" }}
         >
           <Typography
+            dir="ltr"
             fontSize="14px"
             fontWeight={700}
             color="text.primary"
             gutterBottom
             component="div"
           >
-            پاندای کونگ فوکار 4
+            {movie.title}
           </Typography>
           <Stack
             direction="row"
