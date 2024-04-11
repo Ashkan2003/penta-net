@@ -10,7 +10,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
-
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 interface Props {
   params: { movieId: string };
 }
@@ -19,12 +19,14 @@ const MovieDetailsPage = ({ params }: Props) => {
   const { movieDetails, isLoadingMovieDetails, error } = useMovieDetails(
     Number(params.movieId)
   );
+
   if (isLoadingMovieDetails)
     return (
-      <div className="relative h-[50vh]">
-        <CircularProgress className="!absolute" size={200} color="error" />
+      <div className="h-[90vh] flex items-center justify-center">
+        <CircularProgress color="error" size={50} />
       </div>
     );
+
   const movieImdbRate = Math.round(movieDetails!.vote_average * 10) / 10;
   const movieReleaseDate = movieDetails!.release_date.slice(0, 4);
   const moviePopularityPercent = Math.round(movieDetails!.popularity)
@@ -44,16 +46,22 @@ const MovieDetailsPage = ({ params }: Props) => {
         />
         <div className="absolute w-full h-full bg-gradient-to-b from-[#ffffff00] to-[#121212] " />
         <div className="absolute p-5 flex flex-col gap-6 text-white">
-          {/* the film logo */}
-          <Image src="/bleach-logo.png" width={200} height={50} alt="logo" />
           {/* the film title */}
-          <p className="text-[20px]">{movieDetails?.title}</p>
+          <div>
+            <p className="text-[25px]">{movieDetails?.title}</p>
+            <div className="flex text-sm text-secondText gap-3">
+              <span className="font-bold pt-1">
+                {movieDetails?.runtime} دقیقه
+              </span>
+              <span>_</span>
+              <span className="font-bold pt-1 ">{movieReleaseDate}</span>
+            </div>
+          </div>
           {/* the film info */}
           <div className="flex text-[14px] justify-between items-center w-[500px]">
             <span className="px-2 py-1 font-bold text-[12px]  rounded-2xl text-black   bg-gradient-to-b  from-[#f69067] to-[#f95a1b]">
               15+
             </span>
-            <span className="font-bold pt-1">{movieReleaseDate}</span>
             <div className="flex pt-1">
               <span className="font-bold pe-2">IMDB</span>
               <p>{movieImdbRate}</p>
@@ -92,11 +100,10 @@ const MovieDetailsPage = ({ params }: Props) => {
           {/* film actors and directors */}
           <div className="flex flex-col gap-1">
             <Typography fontSize={12} color="primary.light">
-              ستارگان: Masakazu MoritaYuki MatsuokaHiroki YasumotoNoriaki
-              Sugiyama
+              انتشار : {movieDetails?.production_companies[0].name}{" "}
             </Typography>
             <Typography fontSize={12} color="primary.light">
-              کارگردان: Tomohisa Taguchi
+              بودجه : {movieDetails?.budget}$
             </Typography>
           </div>
         </div>
