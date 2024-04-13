@@ -11,6 +11,6 @@ export const useMovies = () => {
     queryKey: ["movies"], // the queryKey is a unic key to identify the data in the cash
     
   });
-  console.log(data, "sss");
+  // console.log(data, "sss");
   return { isLoadingMovies, error, data };
 };

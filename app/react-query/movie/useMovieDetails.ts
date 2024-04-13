@@ -11,6 +11,6 @@ export const useMovieDetails = (movieId: number) => {
     queryFn: async () => await getMovieDetails(movieId),
     queryKey: ["movieDetails",movieId], // the queryKey is a unic key to identify the data in the cash
   });
-  console.log(movieDetails, "ddd");
+  // console.log(movieDetails, "ddd");
   return { movieDetails, isLoadingMovieDetails, error };
 };

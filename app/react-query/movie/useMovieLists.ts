@@ -11,6 +11,6 @@ export const useMovieLists = () => {
     queryFn: async () => await getPopularMovieLists(),
     queryKey: ["movieLists"], // the queryKey is a unic key to identify the data in the cash
   });
-  console.log(movieLists, "ddd");
+  // console.log(movieLists, "ddd");
   return { isLoadingMovieLists, error, movieLists };
 };

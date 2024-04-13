@@ -10,7 +10,6 @@ export default function Page() {
 
   if (isLoadingMovieLists) return <CircularProgress size={100} color="info" />;
   if (error) toast.error("لطفا اتصال اینترنتی خود را چک کنید.")
-  console.log(error);
 
   return (
     <div className="py-9 px-3 ">

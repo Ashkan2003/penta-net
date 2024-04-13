@@ -17,7 +17,6 @@ export default function Home() {
   /////////////////////////////////
   const { error, isLoadingMovies, data } = useMovies();
   if (isLoadingMovies) return null;
-  console.log(data);
 
   ////////////////////////////////
   return (
