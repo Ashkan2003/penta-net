@@ -25,8 +25,6 @@ export default function MovieCard({ movie }: Props) {
     .toString()
     .slice(0, 2);
 
-  
-
   return (
     <Card className="group relative" sx={{ bgcolor: "#1E2027" }}>
       <CardActionArea LinkComponent={Link} href={`/movie/${movie.id}`}>

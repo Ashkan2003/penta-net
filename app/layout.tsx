@@ -8,6 +8,7 @@
 // npm i @tanstack/react-query
 // npm i @tanstack/react-query-devtools
 // npm i react-hot-toast
+// npm install react-intersection-observer --save // to implement the infinite movie scroll
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -18,7 +19,7 @@ import SideBar from "./components/layout/SideBar";
 import "./globals.css";
 import ReactQueryProvider from "./providers/QueryClientProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 // this is the way of importing a local font
 const IranSansWeb = localFont({
   src: "../public/fonts/teqh_iransansweb.ttf",
@@ -43,7 +44,7 @@ export default function RootLayout({
           {/* this is for mui-rtl and catch-provider */}
           <MuiRtlAndAppRouterCacheProvider>
             <ReactQueryProvider>
-              <Box sx={{ display: "flex",bgcolor:"#1E2027" }}>
+              <Box sx={{ display: "flex", bgcolor: "#1E2027" }}>
                 <SideBar />
                 <Header />
                 <Box
@@ -54,9 +55,7 @@ export default function RootLayout({
                   }}
                 >
                   <Toolbar />
-                  <main className="bg-[#1E2027]">
-                    {children}
-                  </main>
+                  <main className="bg-[#1E2027]">{children}</main>
                 </Box>
               </Box>
               <Toaster />

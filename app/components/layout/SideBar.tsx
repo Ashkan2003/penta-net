@@ -40,7 +40,7 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
   },
   {
     title: "جدول پخش",
-    href: "/admin",
+    href: "/inf-movie",
 
     icon: <EventNoteIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
