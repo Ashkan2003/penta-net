@@ -5,7 +5,7 @@ export async function getPopularMovieLists() {
     method: "GET",
     url: "https://api.themoviedb.org/3/movie/popular",
 
-    params: { language: "en-US", page: "1" },
+    params: { language: "fa-IR", page: "1" },
     headers: {
       accept: "application/json",
       Authorization: process.env.NEXT_PUBLIC_TMDB_API,

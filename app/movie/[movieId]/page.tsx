@@ -1,6 +1,6 @@
 "use client";
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress, styled, Typography } from "@mui/material";
 import Image from "next/image";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
@@ -10,22 +10,20 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
+import MovieVideoSection from "./MovieVideoSection";
+
 interface Props {
   params: { movieId: string };
 }
+
 const MovieDetailsPage = ({ params }: Props) => {
   // fetch a single movieDetails with its id from tmdb-site. the params type is allways string so convert it to number
   const { movieDetails, isLoadingMovieDetails, error } = useMovieDetails(
     Number(params.movieId)
   );
 
-  if (isLoadingMovieDetails)
-    return (
-      <div className="h-[90vh] flex items-center justify-center">
-        <CircularProgress color="error" size={50} />
-      </div>
-    );
+  if (isLoadingMovieDetails) return <FullPageLoading />;
 
   const movieImdbRate = Math.round(movieDetails!.vote_average * 10) / 10;
   const movieReleaseDate = movieDetails!.release_date.slice(0, 4);
@@ -33,9 +31,12 @@ const MovieDetailsPage = ({ params }: Props) => {
     .toString()
     .slice(0, 2);
 
+  console.log(movieDetails);
+
   return (
-    <div className="bg-[#121212] h-[100vh]">
+    <div className="bg-[#121212]">
       <div className="relative overflow-hidden h-[350px] sm:h-[500px] md:h-[550px] ">
+        {/* movie ing */}
         <Image
           className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
           // src="https://image.tmdb.org/t/p/original/5zmiBoMzeeVdQ62no55JOJMY498.jpg"
@@ -44,7 +45,9 @@ const MovieDetailsPage = ({ params }: Props) => {
           fill
           unoptimized
         />
+        {/* hover shadow style */}
         <div className="absolute w-full h-full bg-gradient-to-b from-[#ffffff00] to-[#121212] " />
+        {/* movie info */}
         <div className="absolute p-5 flex flex-col gap-6 text-white">
           {/* the film title */}
           <div>
@@ -107,6 +110,15 @@ const MovieDetailsPage = ({ params }: Props) => {
             </Typography>
           </div>
         </div>
+      </div>
+      {/* movie img and video */}
+      <div className="bg-gradient-to-b from-[#fff0] to-[#000000]   w-full p-5">
+        <div>
+          <p>تصاویر و جزییات</p>
+          
+        </div>
+
+        <MovieVideoSection movieId={Number(params.movieId)} />
       </div>
     </div>
   );

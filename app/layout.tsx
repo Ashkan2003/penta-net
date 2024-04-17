@@ -9,6 +9,7 @@
 // npm i @tanstack/react-query-devtools
 // npm i react-hot-toast
 // npm install react-intersection-observer --save // to implement the infinite movie scroll
+// npm i react-youtube
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";

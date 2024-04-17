@@ -58,7 +58,6 @@ export default function MovieCard({ movie }: Props) {
         </CardMedia>
         <CardContent>
           <Typography
-            dir="ltr"
             fontSize="14px"
             fontWeight={700}
             color="text.primary"
