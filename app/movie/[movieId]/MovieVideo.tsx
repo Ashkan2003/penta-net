@@ -11,7 +11,6 @@ const MovieVideoSection = ({ movieId }: Props) => {
 
   if (isLoadingMovieVideos) return null;
 
-  console.log(movieVideos);
 
   // get the Official Trailer from movie list
   const movieYoutubeVideo = movieVideos?.find((video: any) => {

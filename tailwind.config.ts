@@ -12,6 +12,9 @@ const config: Config = {
       ...defaultTheme.screens,
     },
     extend: {
+      screens:{
+        "2xl":"1480px"
+      },
       colors: {
         firstText: "#ffffff",
         secondText: "#a8a8a8",

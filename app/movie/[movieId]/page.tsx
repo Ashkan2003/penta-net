@@ -11,7 +11,8 @@ import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
 import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
-import MovieVideoSection from "./MovieVideoSection";
+import MovieVideoSection from "./MovieVideo";
+import MovieImgs from "./MovieImgs";
 
 interface Props {
   params: { movieId: string };
@@ -31,7 +32,6 @@ const MovieDetailsPage = ({ params }: Props) => {
     .toString()
     .slice(0, 2);
 
-  console.log(movieDetails);
 
   return (
     <div className="bg-[#121212]">
@@ -112,13 +112,14 @@ const MovieDetailsPage = ({ params }: Props) => {
         </div>
       </div>
       {/* movie img and video */}
-      <div className="bg-gradient-to-b from-[#fff0] to-[#000000]   w-full p-5">
+      <div className="w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5">
         <div>
           <p>تصاویر و جزییات</p>
-          
+          {/* movie imgs */}
+          <MovieImgs movieId={Number(params.movieId)} />
         </div>
 
-        <MovieVideoSection movieId={Number(params.movieId)} />
+        {/* <MovieVideoSection movieId={Number(params.movieId)} /> */}
       </div>
     </div>
   );
