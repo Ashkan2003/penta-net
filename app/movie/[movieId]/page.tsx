@@ -13,6 +13,7 @@ import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
 import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
 import MovieVideoSection from "./MovieVideo";
 import MovieImgs from "./MovieImgs";
+import MovieLogo from "./MovieLogo";
 
 interface Props {
   params: { movieId: string };
@@ -20,7 +21,7 @@ interface Props {
 
 const MovieDetailsPage = ({ params }: Props) => {
   // fetch a single movieDetails with its id from tmdb-site. the params type is allways string so convert it to number
-  const { movieDetails, isLoadingMovieDetails, error } = useMovieDetails(
+  const { movieDetails, isLoadingMovieDetails } = useMovieDetails(
     Number(params.movieId)
   );
 
@@ -32,23 +33,24 @@ const MovieDetailsPage = ({ params }: Props) => {
     .toString()
     .slice(0, 2);
 
-
   return (
     <div className="bg-[#121212]">
       <div className="relative overflow-hidden h-[350px] sm:h-[500px] md:h-[550px] ">
         {/* movie ing */}
         <Image
           className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
-          // src="https://image.tmdb.org/t/p/original/5zmiBoMzeeVdQ62no55JOJMY498.jpg"
           src={`https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path}`}
           alt="poster"
           fill
+          priority
           unoptimized
         />
         {/* hover shadow style */}
         <div className="absolute w-full h-full bg-gradient-to-b from-[#ffffff00] to-[#121212] " />
         {/* movie info */}
         <div className="absolute p-5 flex flex-col gap-6 text-white">
+          {/* the film logo */}
+          <MovieLogo movieId={Number(params.movieId)} />
           {/* the film title */}
           <div>
             <p className="text-[25px]">{movieDetails?.title}</p>
