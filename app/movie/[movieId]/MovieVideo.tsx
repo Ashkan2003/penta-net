@@ -1,32 +1,38 @@
 import { useMovieVideos } from "@/app/react-query/movie/useMovieVideos";
-import { styled } from "@mui/material";
 import React from "react";
 
 interface Props {
   movieId: number;
 }
 
-const MovieVideoSection = ({ movieId }: Props) => {
+const MovieVideo = ({ movieId }: Props) => {
   const { movieVideos, isLoadingMovieVideos } = useMovieVideos(movieId);
 
   if (isLoadingMovieVideos) return null;
 
-
   // get the Official Trailer from movie list
-  const movieYoutubeVideo = movieVideos?.find((video: any) => {
+  let movieYoutubeVideo = movieVideos?.find((video: any) => {
     return video.name === "Official Trailer";
   });
 
+  // if the movie does not have a Official Trailer then get the first item of array
+  if (!movieYoutubeVideo) {
+    movieYoutubeVideo = movieVideos[0];
+  }
+
   return (
-    <iframe
-      style={{
-        display: "block",
-        aspectRatio: "16 / 9",
-        width: "100%",
-      }}
-      src={`https://www.youtube.com/embed/${movieYoutubeVideo.key}`}
-    />
+    <div className="xl:w-[60%]">
+      <iframe
+        style={{
+          display: "block",
+          aspectRatio: "16 / 9",
+          width: "100%",
+          borderRadius: "1%",
+        }}
+        src={`https://www.youtube.com/embed/${movieYoutubeVideo.key}`}
+      />
+    </div>
   );
 };
 
-export default MovieVideoSection;
+export default MovieVideo;

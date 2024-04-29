@@ -66,7 +66,7 @@ const MovieImgs = ({ movieId }: Props) => {
           spaceBetween: 5,
         },
       }}
-      className="h-40 w-[260px] xs:w-[350px] !sm:w-[450px] md:w-[600px] lg:w-[700px] xl:w-[1000px] 2xl:w-[1200px] "
+      className="h-40 w-[280px] xs:w-[370px] !sm:w-[450px] md:w-[600px] lg:w-[700px] xl:w-[1000px] 2xl:w-[1240px] "
     >
       {movieImgsFilePath.map((imgSrc: string, index: number) => (
         <SwiperSlide key={index}>

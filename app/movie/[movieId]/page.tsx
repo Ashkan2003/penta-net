@@ -11,9 +11,11 @@ import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
 import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
-import MovieVideoSection from "./MovieVideo";
 import MovieImgs from "./MovieImgs";
 import MovieLogo from "./MovieLogo";
+import MovieVideo from "./MovieVideo";
+import MovieChatRoom from "./MovieChatRoom";
+import MovieGenres from "./MovieGenres";
 
 interface Props {
   params: { movieId: string };
@@ -33,9 +35,12 @@ const MovieDetailsPage = ({ params }: Props) => {
     .toString()
     .slice(0, 2);
 
+  console.log(movieDetails);
+
   return (
     <div className="bg-[#121212]">
-      <div className="relative overflow-hidden h-[350px] sm:h-[500px] md:h-[550px] ">
+      {/* movie info  */}
+      <div className="relative overflow-hidden h-[480px] sm:h-[500px] md:h-[550px] ">
         {/* movie ing */}
         <Image
           className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
@@ -50,7 +55,9 @@ const MovieDetailsPage = ({ params }: Props) => {
         {/* movie info */}
         <div className="absolute p-5 flex flex-col gap-6 text-white">
           {/* the film logo */}
-          <MovieLogo movieId={Number(params.movieId)} />
+          <div className="flex justify-center sm:justify-start">
+            <MovieLogo movieId={Number(params.movieId)} />
+          </div>
           {/* the film title */}
           <div>
             <p className="text-[25px]">{movieDetails?.title}</p>
@@ -63,7 +70,7 @@ const MovieDetailsPage = ({ params }: Props) => {
             </div>
           </div>
           {/* the film info */}
-          <div className="flex text-[14px] justify-between items-center w-[500px]">
+          <div className="flex flex-wrap text-[14px] justify-between items-center w-full gap-5">
             <span className="px-2 py-1 font-bold text-[12px]  rounded-2xl text-black   bg-gradient-to-b  from-[#f69067] to-[#f95a1b]">
               15+
             </span>
@@ -85,10 +92,11 @@ const MovieDetailsPage = ({ params }: Props) => {
             </div>
           </div>
           {/* the film des */}
-          <p className="w-[550px] text-[14px]">{movieDetails?.overview}</p>
+          <p className="max-w-[500px] text-[14px] ">{movieDetails?.overview}</p>
           {/* film btns */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-wrap gap-5">
             <Button
+            className="w-full xs:w-auto"
               size="large"
               color="info"
               variant="contained"
@@ -102,7 +110,7 @@ const MovieDetailsPage = ({ params }: Props) => {
               <RoundedBtn color="primary" Icon={ThumbDownRoundedIcon} />
             </div>
           </div>
-          {/* film actors and directors */}
+          {/* film budge */}
           <div className="flex flex-col gap-1">
             <Typography fontSize={12} color="primary.light">
               انتشار : {movieDetails?.production_companies[0].name}{" "}
@@ -111,18 +119,20 @@ const MovieDetailsPage = ({ params }: Props) => {
               بودجه : {movieDetails?.budget}$
             </Typography>
           </div>
+          {/* genres list */}
+          <MovieGenres genres={movieDetails?.genres!} />
         </div>
       </div>
       {/* movie img and video */}
-      <div className="w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5">
-        <div>
-          <p>تصاویر و جزییات</p>
-          {/* movie imgs */}
-          <MovieImgs movieId={Number(params.movieId)} />
-        </div>
-
-        {/* <MovieVideoSection movieId={Number(params.movieId)} /> */}
+      <div className="flex flex-col w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5 gap-5">
+        <p>تصاویر و جزییات فیلم</p>
+        {/* movie imgs */}
+        <MovieImgs movieId={Number(params.movieId)} />
+        {/* movie trailer video */}
+        <MovieVideo movieId={Number(params.movieId)} />
       </div>
+      {/* movie chat room */}
+      <MovieChatRoom />
     </div>
   );
 };
