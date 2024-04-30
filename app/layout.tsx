@@ -10,6 +10,7 @@
 // npm i react-hot-toast
 // npm install react-intersection-observer --save // to implement the infinite movie scroll
 //  npm i swiper
+// npm install @clerk/nextjs
 import { Box, Toolbar } from "@mui/material";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -21,6 +22,7 @@ import "./globals.css";
 import ReactQueryProvider from "./providers/QueryClientProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import { ClerkProvider } from "@clerk/nextjs";
 // this is the way of importing a local font
 const IranSansWeb = localFont({
   src: "../public/fonts/teqh_iransansweb.ttf",
@@ -38,33 +40,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html dir="rtl" className="bg-[#1E2027]">
-      <body className={IranSansWeb.variable}>
-        {/* this is for custom mui theme */}
-        <MuiCustomThemeProvider>
-          {/* this is for mui-rtl and catch-provider */}
-          <MuiRtlAndAppRouterCacheProvider>
-            <ReactQueryProvider>
-              <Box sx={{ display: "flex", bgcolor: "#1E2027" }}>
-                <SideBar />
-                <Header />
-                <Box
-                  component="main"
-                  sx={{
-                    flexGrow: 1,
-                    width: { md: `calc(100% - ${240}px)` },
-                  }}
-                >
-                  <Toolbar />
-                  <main className="bg-[#1E2027]">{children}</main>
+    <ClerkProvider>
+      <html dir="rtl" className="bg-[#1E2027]">
+        <body className={IranSansWeb.variable}>
+          {/* this is for custom mui theme */}
+          <MuiCustomThemeProvider>
+            {/* this is for mui-rtl and catch-provider */}
+            <MuiRtlAndAppRouterCacheProvider>
+              <ReactQueryProvider>
+                <Box sx={{ display: "flex", bgcolor: "#1E2027" }}>
+                  <SideBar />
+                  <Header />
+                  <Box
+                    component="main"
+                    sx={{
+                      flexGrow: 1,
+                      width: { md: `calc(100% - ${240}px)` },
+                    }}
+                  >
+                    <Toolbar />
+                    <main className="bg-[#1E2027]">{children}</main>
+                  </Box>
                 </Box>
-              </Box>
-              <Toaster />
-              <ReactQueryDevtools position="left" initialIsOpen={false} />
-            </ReactQueryProvider>
-          </MuiRtlAndAppRouterCacheProvider>
-        </MuiCustomThemeProvider>
-      </body>
-    </html>
+                <Toaster />
+                <ReactQueryDevtools position="left" initialIsOpen={false} />
+              </ReactQueryProvider>
+            </MuiRtlAndAppRouterCacheProvider>
+          </MuiCustomThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
