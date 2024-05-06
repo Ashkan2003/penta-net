@@ -51,17 +51,20 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
   },
 ];
 
-const menuListArray2: { title: string; icon: any }[] = [
+const menuListArray2: { title: string; href: string; icon: any }[] = [
   {
     title: "تاریخچه",
+    href: "/",
     icon: <HistoryIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "ذخیره شده ها",
+    href: "/",
     icon: <BookmarkIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "لیست های من",
+    href: "/",
     icon: (
       <CollectionsBookmarkIcon
         fontSize="small"
@@ -71,23 +74,26 @@ const menuListArray2: { title: string; icon: any }[] = [
   },
   {
     title: "دانلود ها",
+    href: "/",
     icon: <SaveAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
 ];
 
-const menuListArray3: { title: string; icon: any }[] = [
+const menuListArray3: { title: string; href: string; icon: any }[] = [
   {
     title: "تنظیمات",
+    href: "/",
     icon: <SettingsIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "پروفایل",
+    href: "/userProfile",
     icon: <AccountCircleIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
 ];
 
 export default function SideBar() {
-  const [selectedIndex, setSelectedIndex] = React.useState(1); // the current selected watch from the list
+  const [selectedListItem, setSelectedListItem] = React.useState("خانه"); // the current selected watch from the list
 
   // get this from zustand
   const isDrawerOpen = useBoundStore((state) => state.isDrawerOpen);
@@ -102,9 +108,9 @@ export default function SideBar() {
   // this function is for activating the selected watch by adding some style
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
+    listItemTitle: string
   ) => {
-    setSelectedIndex(index);
+    setSelectedListItem(listItemTitle);
     handleDrawerClose();
   };
 
@@ -128,14 +134,14 @@ export default function SideBar() {
           <Link href={item.href} key={item.title}>
             <ListItem
               className={` ${
-                selectedIndex === index &&
+                selectedListItem === item.title &&
                 "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
               }`}
               sx={{ padding: 0 }}
               disablePadding
             >
               <ListItemButton
-                onClick={(event) => handleListItemClick(event, index)}
+                onClick={(event) => handleListItemClick(event, item.title)}
               >
                 <ListItemIcon sx={{ minWidth: "30px" }}>
                   {item.icon}
@@ -148,10 +154,19 @@ export default function SideBar() {
       </List>
       <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
       <List>
-        {menuListArray2.map((item) => (
-          <Link href="/admin" key={item.title}>
-            <ListItem sx={{ padding: 0 }} disablePadding>
-              <ListItemButton>
+        {menuListArray2.map((item, index) => (
+          <Link href={item.href} key={item.title}>
+            <ListItem
+              className={` ${
+                selectedListItem === item.title &&
+                "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
+              }`}
+              sx={{ padding: 0 }}
+              disablePadding
+            >
+              <ListItemButton
+                onClick={(event) => handleListItemClick(event, item.title)}
+              >
                 <ListItemIcon sx={{ minWidth: "30px" }}>
                   {item.icon}
                 </ListItemIcon>
@@ -163,10 +178,19 @@ export default function SideBar() {
       </List>
       <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
       <List>
-        {menuListArray3.map((item) => (
-          <Link href="/admin" key={item.title}>
-            <ListItem sx={{ padding: 0 }} disablePadding>
-              <ListItemButton>
+        {menuListArray3.map((item, index) => (
+          <Link href={item.href} key={item.title}>
+            <ListItem
+              className={` ${
+                selectedListItem === item.title &&
+                "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
+              }`}
+              sx={{ padding: 0 }}
+              disablePadding
+            >
+              <ListItemButton
+                onClick={(event) => handleListItemClick(event, item.title)}
+              >
                 <ListItemIcon sx={{ minWidth: "30px" }}>
                   {item.icon}
                 </ListItemIcon>
