@@ -1,0 +1,18 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// write npx prisma format to format(prettier) the code
+// write npx prisma migrate dev to create and save chages to db
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserPentaNetAccount {
+  id             Int    @id @default(autoincrement())
+  userCollection String
+}
