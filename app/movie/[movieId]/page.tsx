@@ -1,21 +1,22 @@
 "use client";
+import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
-import { Button, CircularProgress, styled, Typography } from "@mui/material";
-import Image from "next/image";
+import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
-import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
-import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
-import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
+import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
+import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
+import { Button, IconButton, Tooltip, Typography } from "@mui/material";
+import Zoom from "@mui/material/Zoom";
+import Image from "next/image";
+import MovieChatRoom from "./MovieChatRoom";
+import MovieGenres from "./MovieGenres";
 import MovieImgs from "./MovieImgs";
 import MovieLogo from "./MovieLogo";
 import MovieVideo from "./MovieVideo";
-import MovieChatRoom from "./MovieChatRoom";
-import MovieGenres from "./MovieGenres";
 
 interface Props {
   params: { movieId: string };
@@ -96,7 +97,7 @@ const MovieDetailsPage = ({ params }: Props) => {
           {/* film btns */}
           <div className="flex items-center flex-wrap gap-5">
             <Button
-            className="w-full xs:w-auto"
+              className="w-full xs:w-auto"
               size="large"
               color="info"
               variant="contained"
@@ -105,9 +106,25 @@ const MovieDetailsPage = ({ params }: Props) => {
               خرید اشتراک
             </Button>
             <div className="flex justify-between w-40 ps-3">
-              <RoundedBtn color="primary" Icon={AddRoundedIcon} />
-              <RoundedBtn color="primary" Icon={ThumbUpAltRoundedIcon} />
-              <RoundedBtn color="primary" Icon={ThumbDownRoundedIcon} />
+              <Tooltip
+                TransitionComponent={Zoom}
+                title="افزودن به لیست من"
+                arrow
+              >
+                <IconButton color="success">
+                  <RoundedBtn color="primary" Icon={AddRoundedIcon} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip TransitionComponent={Zoom} title="دوست داشتم" arrow>
+                <IconButton color="success">
+                  <RoundedBtn color="primary" Icon={ThumbUpAltRoundedIcon} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip TransitionComponent={Zoom} title="دوست نداشتم" arrow>
+                <IconButton color="success">
+                  <RoundedBtn color="primary" Icon={ThumbDownRoundedIcon} />
+                </IconButton>
+              </Tooltip>
             </div>
           </div>
           {/* film budge */}

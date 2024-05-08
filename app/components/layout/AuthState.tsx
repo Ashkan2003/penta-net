@@ -20,7 +20,7 @@ const AuthState = () => {
         // if the user hasnt signed in so show sign in btn
 
         <Button color="success" variant="outlined">
-          <SignInButton>
+          <SignInButton mode="modal">
             <p className="cursor-pointer">ورود/ثبت نام</p>
           </SignInButton>
         </Button>

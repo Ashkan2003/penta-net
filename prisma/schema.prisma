@@ -13,6 +13,6 @@ datasource db {
 }
 
 model UserPentaNetAccount {
-  id             Int    @id @default(autoincrement())
-  userCollection String
+  userClerkId    String  @id
+  userCollection String?
 }
