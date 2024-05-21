@@ -35,18 +35,17 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
   },
   {
     title: "ترندها",
-    href: "/popular-movies",
+    href: "/popularMovies",
     icon: <WhatshotIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "جدول پخش",
-    href: "/inf-movie",
-
+    href: "/",
     icon: <EventNoteIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "دسته بندی ها",
-    href: "/admin",
+    href: "/categories",
     icon: <FilterAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
 ];

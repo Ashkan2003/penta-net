@@ -32,6 +32,7 @@ const MovieDetailsPage = ({ params }: Props) => {
 
   const movieImdbRate = Math.round(movieDetails!.vote_average * 10) / 10;
   const movieReleaseDate = movieDetails!.release_date.slice(0, 4);
+  const movieDes = movieDetails?.overview.slice(0, 200);
   const moviePopularityPercent = Math.round(movieDetails!.popularity)
     .toString()
     .slice(0, 2);
@@ -41,7 +42,7 @@ const MovieDetailsPage = ({ params }: Props) => {
   return (
     <div className="bg-[#121212]">
       {/* movie info  */}
-      <div className="relative overflow-hidden h-[480px] sm:h-[500px] md:h-[550px] ">
+      <div className="relative overflow-hidden h-[700px] xs:h-[550px] sm:h-[550px] md:h-[550px] ">
         {/* movie ing */}
         <Image
           className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
@@ -93,7 +94,7 @@ const MovieDetailsPage = ({ params }: Props) => {
             </div>
           </div>
           {/* the film des */}
-          <p className="max-w-[500px] text-[14px] ">{movieDetails?.overview}</p>
+          <p className="max-w-[500px] text-[14px] ">{movieDes}...</p>
           {/* film btns */}
           <div className="flex items-center flex-wrap gap-5">
             <Button
@@ -141,7 +142,7 @@ const MovieDetailsPage = ({ params }: Props) => {
         </div>
       </div>
       {/* movie img and video */}
-      <div className="flex flex-col w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5 gap-5">
+      <div className="flex flex-col w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5 pt-5 gap-5">
         <p>تصاویر و جزییات فیلم</p>
         {/* movie imgs */}
         <MovieImgs movieId={Number(params.movieId)} />
