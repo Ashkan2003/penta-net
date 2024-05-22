@@ -1,5 +1,4 @@
 "use client";
-import FullPageLoading from "@/app/components/reusable-components/FullPageLoading";
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -17,6 +16,7 @@ import MovieGenres from "./MovieGenres";
 import MovieImgs from "./MovieImgs";
 import MovieLogo from "./MovieLogo";
 import MovieVideo from "./MovieVideo";
+import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
 
 interface Props {
   params: { movieId: string };
@@ -28,7 +28,7 @@ const MovieDetailsPage = ({ params }: Props) => {
     Number(params.movieId)
   );
 
-  if (isLoadingMovieDetails) return <FullPageLoading />;
+  if (isLoadingMovieDetails) return <FullPageLoadingSpinner />;
 
   const movieImdbRate = Math.round(movieDetails!.vote_average * 10) / 10;
   const movieReleaseDate = movieDetails!.release_date.slice(0, 4);

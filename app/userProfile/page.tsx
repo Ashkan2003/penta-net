@@ -3,7 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import { InputAdornment, Paper, Stack, TextField } from "@mui/material";
-import FullPageLoading from "../components/reusable-components/FullPageLoading";
+import FullPageLoading from "../components/reusable-components/FullPageLoadingSpinner";
 import PublicInfoPage from "../components/reusable-components/PublicInfoPage";
 
 const UserProfile = () => {

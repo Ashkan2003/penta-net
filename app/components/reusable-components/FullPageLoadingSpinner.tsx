@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 
-const FullPageLoading = () => {
+const FullPageLoadingSpinner = () => {
   return (
     <div className="h-[90vh] flex items-center justify-center">
       <CircularProgress color="error" size={50} />
@@ -8,4 +8,4 @@ const FullPageLoading = () => {
   );
 };
 
-export default FullPageLoading;
+export default FullPageLoadingSpinner;
