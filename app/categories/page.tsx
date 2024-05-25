@@ -22,13 +22,13 @@ const CategoriesPage = () => {
     useMoviesByGenre("Fantasy,14");
 
   if (
-    isLoading1 &&
-    isLoading2 &&
-    isLoading3 &&
-    isLoading4 &&
-    isLoading5 &&
-    isLoading6 &&
-    isLoading7 &&
+    isLoading1 ||
+    isLoading2 ||
+    isLoading3 ||
+    isLoading4 ||
+    isLoading5 ||
+    isLoading6 ||
+    isLoading7 ||
     isLoading8
   )
     return <FullPageLoadingSpinner />;

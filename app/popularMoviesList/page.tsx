@@ -11,7 +11,7 @@ import { movieListType } from "../types/movieTypes";
 //1 react-qeury useInfiniteQuery-hook and => to get the inf-data and incrice the fetching pageNumber
 //2 react-intersection-observer => we need this to know when the user reches the element we want we can use a element like div at the button of the list so when the user reches to it is value get true so we send a signal to react-inf-query to fetch the next page
 
-export default function Page() {
+export default function PopularMoviesListPage() {
   const {
     data,
     error,

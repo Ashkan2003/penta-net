@@ -34,13 +34,13 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
     icon: <HomeIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "ترندها",
-    href: "/popularMovies",
+    title: "فیلم ها",
+    href: "/popularMoviesList",
     icon: <WhatshotIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "جدول پخش",
-    href: "/",
+    title: "سریال",
+    href: "/popularTVSeriesList",
     icon: <EventNoteIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {

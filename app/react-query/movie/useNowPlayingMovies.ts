@@ -1,4 +1,3 @@
-import { getMovies } from "@/app/services/movie/getMovies";
 import { getNowPlayingMovies } from "@/app/services/movie/getNowPlayingMovies";
 import { movieListType } from "@/app/types/movieTypes";
 import { useQuery } from "@tanstack/react-query";

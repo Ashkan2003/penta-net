@@ -1,7 +1,5 @@
 "use client";
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
-import MovieLogo from "@/app/movie/[movieId]/MovieLogo";
-import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
@@ -12,23 +10,28 @@ import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
 import { Button, IconButton, Tooltip, Typography } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
-import FullPageLoadingSpinner from "../reusable-components/FullPageLoadingSpinner";
-import GenresList from "../reusable-components/GenresList";
+
+import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
+import { useTVSeriesDetails } from "@/app/react-query/tvSeries/useTVSeriesDetails";
+import TVSeriesImgs from "./TVSeriesImgs";
+import TVSeriesLogo from "./TVSeriesLogo";
+import GenresList from "@/app/components/reusable-components/GenresList";
 
 interface Props {
-  randomMovieId: number;
+  params: { tvSeriesId: string };
 }
 
-const RandomMovie = ({ randomMovieId }: Props) => {
-  const { movieDetails, isLoadingMovieDetails } =
-    useMovieDetails(randomMovieId);
+const TVSeriesDetailsPage = ({ params }: Props) => {
+  // fetch a single tvSeriesDetails with its id from tmdb-site. the params type is allways string so convert it to number
+  const { tvSeriesDetails, isLoadingTVSeriesDetails, error } =
+    useTVSeriesDetails(Number(params.tvSeriesId));
 
-  if (isLoadingMovieDetails) return <FullPageLoadingSpinner />;
-
-  const movieImdbRate = Math.round(movieDetails!.vote_average * 10) / 10;
-  const movieReleaseDate = movieDetails!.release_date.slice(0, 4);
-  const movieDes = movieDetails?.overview.slice(0, 200);
-  const moviePopularityPercent = Math.round(movieDetails!.popularity)
+  if (isLoadingTVSeriesDetails) return <FullPageLoadingSpinner />;
+  console.log(tvSeriesDetails, "ppppppp");
+  const tvSeriesImdbRate = Math.round(tvSeriesDetails!.vote_average * 10) / 10;
+  const tvSeriesReleaseDate = tvSeriesDetails!.first_air_date.slice(0, 4);
+  const tvSeriesDes = tvSeriesDetails?.overview.slice(0, 200);
+  const tvSeriesPopularityPercent = Math.round(tvSeriesDetails!.popularity)
     .toString()
     .slice(0, 2);
 
@@ -39,7 +42,7 @@ const RandomMovie = ({ randomMovieId }: Props) => {
         {/* movie ing */}
         <Image
           className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
-          src={`https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original${tvSeriesDetails?.backdrop_path}`}
           alt="poster"
           fill
           priority
@@ -51,17 +54,17 @@ const RandomMovie = ({ randomMovieId }: Props) => {
         <div className="absolute p-5 flex flex-col gap-6 text-white">
           {/* the film logo */}
           <div className="flex justify-center sm:justify-start">
-            <MovieLogo movieId={randomMovieId} />
+            <TVSeriesLogo tvSeriesId={Number(params.tvSeriesId)} />
           </div>
           {/* the film title */}
           <div>
-            <p className="text-[25px]">{movieDetails?.title}</p>
+            <p className="text-[25px]">{tvSeriesDetails?.name}</p>
             <div className="flex text-sm text-secondText gap-3">
               <span className="font-bold pt-1">
-                {movieDetails?.runtime} دقیقه
+                {tvSeriesDetails.number_of_episodes} قسمت{" "}
               </span>
               <span>_</span>
-              <span className="font-bold pt-1 ">{movieReleaseDate}</span>
+              <span className="font-bold pt-1 ">{tvSeriesReleaseDate}</span>
             </div>
           </div>
           {/* the film info */}
@@ -71,11 +74,11 @@ const RandomMovie = ({ randomMovieId }: Props) => {
             </span>
             <div className="flex pt-1">
               <span className="font-bold pe-2">IMDB</span>
-              <p>{movieImdbRate}</p>
+              <p>{tvSeriesImdbRate}</p>
             </div>
             <div>
               <FavoriteIcon />
-              {moviePopularityPercent}%
+              {tvSeriesPopularityPercent}%
             </div>
             <div>
               <KeyboardVoiceIcon />
@@ -87,7 +90,7 @@ const RandomMovie = ({ randomMovieId }: Props) => {
             </div>
           </div>
           {/* the film des */}
-          <p className="max-w-[500px] text-[14px] ">{movieDes}...</p>
+          <p className="max-w-[500px] text-[14px] ">{tvSeriesDes}...</p>
           {/* film btns */}
           <div className="flex items-center flex-wrap gap-5">
             <Button
@@ -124,18 +127,28 @@ const RandomMovie = ({ randomMovieId }: Props) => {
           {/* film budge */}
           <div className="flex flex-col gap-1">
             <Typography fontSize={12} color="primary.light">
-              انتشار : {movieDetails?.production_companies[0].name}{" "}
+              انتشار : {tvSeriesDetails?.production_companies[0].name}{" "}
             </Typography>
             <Typography fontSize={12} color="primary.light">
-              بودجه : {movieDetails?.budget}$
+              وضعیت : {tvSeriesDetails.status}
             </Typography>
           </div>
           {/* genres list */}
-          <GenresList genres={movieDetails?.genres!} />
+          <GenresList genres={tvSeriesDetails?.genres!} />
         </div>
       </div>
+      {/* movie img and video */}
+      <div className="flex flex-col w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5 pt-5 gap-5">
+        <p>تصاویر و جزییات فیلم</p>
+        {/* tvSeries imgs */}
+        <TVSeriesImgs tvSeriesId={tvSeriesDetails.id} />
+        {/* movie trailer video */}
+        {/* <MovieVideo movieId={Number(params.movieId)} /> */}
+      </div>
+      {/* movie chat room */}
+      {/* <MovieChatRoom /> */}
     </div>
   );
 };
 
-export default RandomMovie;
+export default TVSeriesDetailsPage;

@@ -12,11 +12,11 @@ import { Button, IconButton, Tooltip, Typography } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
 import MovieChatRoom from "./MovieChatRoom";
-import MovieGenres from "./MovieGenres";
 import MovieImgs from "./MovieImgs";
 import MovieLogo from "./MovieLogo";
 import MovieVideo from "./MovieVideo";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
+import GenresList from "@/app/components/reusable-components/GenresList";
 
 interface Props {
   params: { movieId: string };
@@ -138,7 +138,7 @@ const MovieDetailsPage = ({ params }: Props) => {
             </Typography>
           </div>
           {/* genres list */}
-          <MovieGenres genres={movieDetails?.genres!} />
+          <GenresList genres={movieDetails?.genres!} />
         </div>
       </div>
       {/* movie img and video */}
