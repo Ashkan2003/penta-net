@@ -36,7 +36,7 @@ const Header = () => {
         {/* the search box */}
         <AutoCompleteBox />
         {/* the header icons list */}
-        <HeaderIcons />
+        {/* <HeaderIcons /> */}
       </Toolbar>
       <Divider sx={{ bgcolor: "#827d7d" }} />
     </AppBar>

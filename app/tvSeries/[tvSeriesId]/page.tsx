@@ -16,6 +16,7 @@ import { useTVSeriesDetails } from "@/app/react-query/tvSeries/useTVSeriesDetail
 import TVSeriesImgs from "./TVSeriesImgs";
 import TVSeriesLogo from "./TVSeriesLogo";
 import GenresList from "@/app/components/reusable-components/GenresList";
+import TVSeriesVideo from "./TVSeriesVideo";
 
 interface Props {
   params: { tvSeriesId: string };
@@ -142,8 +143,8 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
         <p>تصاویر و جزییات فیلم</p>
         {/* tvSeries imgs */}
         <TVSeriesImgs tvSeriesId={tvSeriesDetails.id} />
-        {/* movie trailer video */}
-        {/* <MovieVideo movieId={Number(params.movieId)} /> */}
+        {/* tvSeries  trailer video */}
+        <TVSeriesVideo tvSeriesId={tvSeriesDetails.id}/>
       </div>
       {/* movie chat room */}
       {/* <MovieChatRoom /> */}
