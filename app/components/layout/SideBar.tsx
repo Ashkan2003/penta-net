@@ -24,6 +24,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
 import { useBoundStore } from "@/zustand/store";
+import { usePathname } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -48,22 +49,19 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
     href: "/categories",
     icon: <FilterAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
-];
-
-const menuListArray2: { title: string; href: string; icon: any }[] = [
   {
     title: "تاریخچه",
-    href: "/",
+    href: "/ooooooooooo",
     icon: <HistoryIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "ذخیره شده ها",
-    href: "/",
+    href: "/ppppppppppp",
     icon: <BookmarkIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "لیست های من",
-    href: "/",
+    href: "/lllllllllllllll",
     icon: (
       <CollectionsBookmarkIcon
         fontSize="small"
@@ -73,15 +71,12 @@ const menuListArray2: { title: string; href: string; icon: any }[] = [
   },
   {
     title: "دانلود ها",
-    href: "/",
+    href: "/ddddddddddddddd",
     icon: <SaveAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
-];
-
-const menuListArray3: { title: string; href: string; icon: any }[] = [
   {
     title: "تنظیمات",
-    href: "/",
+    href: "/sssssssssssss",
     icon: <SettingsIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
@@ -93,6 +88,7 @@ const menuListArray3: { title: string; href: string; icon: any }[] = [
 
 export default function SideBar() {
   const [selectedListItem, setSelectedListItem] = React.useState("خانه"); // the current selected watch from the list
+  const currentPath = usePathname(); //Get the current pathname
 
   // get this from zustand
   const isDrawerOpen = useBoundStore((state) => state.isDrawerOpen);
@@ -133,7 +129,7 @@ export default function SideBar() {
           <Link href={item.href} key={item.title}>
             <ListItem
               className={` ${
-                selectedListItem === item.title &&
+                item.href === currentPath &&
                 "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
               }`}
               sx={{ padding: 0 }}
@@ -148,58 +144,15 @@ export default function SideBar() {
                 <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
+            {index == 3 && (
+              <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
+            )}
+            {index == 7 && (
+              <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
+            )}
           </Link>
         ))}
       </List>
-      <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
-      <List>
-        {menuListArray2.map((item, index) => (
-          <Link href={item.href} key={item.title}>
-            <ListItem
-              className={` ${
-                selectedListItem === item.title &&
-                "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
-              }`}
-              sx={{ padding: 0 }}
-              disablePadding
-            >
-              <ListItemButton
-                onClick={(event) => handleListItemClick(event, item.title)}
-              >
-                <ListItemIcon sx={{ minWidth: "30px" }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
-      <List>
-        {menuListArray3.map((item, index) => (
-          <Link href={item.href} key={item.title}>
-            <ListItem
-              className={` ${
-                selectedListItem === item.title &&
-                "!text-red-600 bg-indigo-950 bg-opacity-30 transition-all"
-              }`}
-              sx={{ padding: 0 }}
-              disablePadding
-            >
-              <ListItemButton
-                onClick={(event) => handleListItemClick(event, item.title)}
-              >
-                <ListItemIcon sx={{ minWidth: "30px" }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider variant="middle" sx={{ bgcolor: "primary.light" }} />
     </Stack>
   );
 
