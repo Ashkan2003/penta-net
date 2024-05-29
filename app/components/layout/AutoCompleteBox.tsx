@@ -1,7 +1,7 @@
 "use client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { ListItem, Popper, Stack, Typography } from "@mui/material";
+import { Box, ListItem, Popper, Stack, Typography } from "@mui/material";
 import { useMultiSearchQuery } from "@/app/react-query/search/useMultiSearchQuery";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -25,7 +25,7 @@ export default function AutoCompleteBox() {
   };
   return (
     <Autocomplete
-      getOptionKey={(option) => option.id} // set the movie-id for option-key
+      getOptionKey={(option: any) => option.id} // set the movie-id for option-key
       freeSolo
       filterOptions={(option) => option}
       options={multiSearchData == undefined ? [] : multiSearchData}
@@ -58,15 +58,16 @@ export default function AutoCompleteBox() {
         />
       )}
       renderOption={(props, option: any) => (
-        <ListItem
-          {...props}
-          onClick={() => handelOptionClick(option)}
+        <div
+          // {...props}
+          className="px-2 py-1 cursor-pointer"
           dir="ltr"
+          onClick={() => handelOptionClick(option)}
           key={option.id}
         >
           {option.media_type == "movie" && option.title}
           {option.media_type == "tv" && option.name}
-        </ListItem>
+        </div>
       )}
     />
   );
