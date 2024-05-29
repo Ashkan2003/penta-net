@@ -28,14 +28,13 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
     useTVSeriesDetails(Number(params.tvSeriesId));
 
   if (isLoadingTVSeriesDetails) return <FullPageLoadingSpinner />;
-  console.log(tvSeriesDetails, "ppppppp");
+
   const tvSeriesImdbRate = Math.round(tvSeriesDetails!.vote_average * 10) / 10;
   const tvSeriesReleaseDate = tvSeriesDetails!.first_air_date.slice(0, 4);
   const tvSeriesDes = tvSeriesDetails?.overview.slice(0, 200);
   const tvSeriesPopularityPercent = Math.round(tvSeriesDetails!.popularity)
     .toString()
     .slice(0, 2);
-
   return (
     <div className="bg-[#121212]">
       {/* movie info  */}
@@ -127,9 +126,11 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
           </div>
           {/* film budge */}
           <div className="flex flex-col gap-1">
-            <Typography fontSize={12} color="primary.light">
-              انتشار : {tvSeriesDetails?.production_companies[0].name}{" "}
-            </Typography>
+            {tvSeriesDetails?.production_companies[0]?.name && (
+              <Typography fontSize={12} color="primary.light">
+                انتشار : {tvSeriesDetails?.production_companies[0]?.name}
+              </Typography>
+            )}
             <Typography fontSize={12} color="primary.light">
               وضعیت : {tvSeriesDetails.status}
             </Typography>
@@ -144,7 +145,7 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
         {/* tvSeries imgs */}
         <TVSeriesImgs tvSeriesId={tvSeriesDetails.id} />
         {/* tvSeries  trailer video */}
-        <TVSeriesVideo tvSeriesId={tvSeriesDetails.id}/>
+        <TVSeriesVideo tvSeriesId={tvSeriesDetails.id} />
       </div>
       {/* movie chat room */}
       {/* <MovieChatRoom /> */}

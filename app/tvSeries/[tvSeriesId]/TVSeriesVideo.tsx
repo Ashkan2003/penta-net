@@ -10,7 +10,6 @@ const TVSeriesVideo = ({ tvSeriesId }: Props) => {
     useTVSeriesVideos(tvSeriesId);
 
   if (isLoadingTVSeriesVideos) return null;
-
   // get the Official Trailer from tvSeries list
   let tvSeriesYoutubeVideo = tvSeriesVideos?.find((video: any) => {
     return video.name === "Official Trailer";
@@ -21,19 +20,24 @@ const TVSeriesVideo = ({ tvSeriesId }: Props) => {
     tvSeriesYoutubeVideo = tvSeriesVideos[0];
   }
 
-  return (
-    <div className="xl:w-[60%]">
-      <iframe
-        style={{
-          display: "block",
-          aspectRatio: "16 / 9",
-          width: "100%",
-          borderRadius: "1%",
-        }}
-        src={`https://www.youtube.com/embed/${tvSeriesYoutubeVideo.key}`}
-      />
-    </div>
-  );
+  // if the tvSeries have a youtube video then render this,otherWise render null
+  if (tvSeriesYoutubeVideo) {
+    return (
+      <div className="xl:w-[60%]">
+        <iframe
+          style={{
+            display: "block",
+            aspectRatio: "16 / 9",
+            width: "100%",
+            borderRadius: "1%",
+          }}
+          src={`https://www.youtube.com/embed/${tvSeriesYoutubeVideo.key}`}
+        />
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default TVSeriesVideo;

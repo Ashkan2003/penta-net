@@ -37,8 +37,6 @@ const MovieDetailsPage = ({ params }: Props) => {
     .toString()
     .slice(0, 2);
 
- 
-
   return (
     <div className="bg-[#121212]">
       {/* movie info  */}
@@ -130,9 +128,11 @@ const MovieDetailsPage = ({ params }: Props) => {
           </div>
           {/* film budge */}
           <div className="flex flex-col gap-1">
-            <Typography fontSize={12} color="primary.light">
-              انتشار : {movieDetails?.production_companies[0].name}{" "}
-            </Typography>
+            {movieDetails?.production_companies[0]?.name && (
+              <Typography fontSize={12} color="primary.light">
+                انتشار : {movieDetails?.production_companies[0].name}
+              </Typography>
+            )}
             <Typography fontSize={12} color="primary.light">
               بودجه : {movieDetails?.budget}$
             </Typography>

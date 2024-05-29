@@ -5,12 +5,12 @@ export const useMultiSearchQuery = () => {
   const queryClient = useQueryClient();
 
   const {
-    isPaused,
     isPending,
     data: multiSearchData,
     error,
     mutate,
   } = useMutation({
+    
     mutationFn: (query: string) => getMultiSearchQuery(query),
     onSuccess: (data) => {
       // the user is the data coming from the mutationFn(the data returned from the loginApi-function)
@@ -18,15 +18,4 @@ export const useMultiSearchQuery = () => {
     },
   });
   return { isPending, multiSearchData, error, mutate };
-  //   const {
-  //     isLoading: isLoadingMultiSearch,
-  //     error,
-  //     data: multiSearchData,
-  //   } = useQuery({
-
-  //     queryFn: async () => await getMultiSearchQuery(query),
-  //     queryKey: ["MultiSearch"], // the queryKey is a unic key to identify the data in the cash
-
-  //   });
-  //   return { multiSearchData, isLoadingMultiSearch, error };
 };

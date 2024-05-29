@@ -1,14 +1,20 @@
 import axios from "axios";
 
-export async function getMultiSearchQuery(query: string) {
-  if (query == "") {
+// this is a http request for getting a list of movies or tvSeries based on the search-query
+export async function getMultiSearchQuery(searchQuery: string) {
+  if (!searchQuery) {
     return [];
   }
 
   const options = {
     method: "GET",
     url: "https://api.themoviedb.org/3/search/multi",
-    params: { query: query, language: "en" },
+    params: {
+      query: searchQuery,
+      language: "en",
+      sort_by: "vote_average.desc",
+      include_video: "true",
+    },
     headers: {
       accept: "application/json",
       Authorization: process.env.NEXT_PUBLIC_TMDB_API,
@@ -24,9 +30,15 @@ export async function getMultiSearchQuery(query: string) {
       console.error(error);
     });
 
-  // filter throug does values that there name is undfind
-  const movieAndTVArray = data.filter((item: any) => {
-    return item.name !== undefined || item.title !== undefined;
+  // filter this array with these parameters =>
+  // we want only the movie or tvSereis that they have a name and title (there .name or .title is not undefined)
+  // we only want the movies and tvSeries so we dont want a media of type "person"
+  const movieAndTVArray = data.filter((movieOrTV: any) => {
+    return (
+      (movieOrTV.name !== undefined || movieOrTV.title !== undefined) &&
+      movieOrTV.media_type !== "person" &&
+      movieOrTV.vote_average > 5
+    );
   });
 
   return movieAndTVArray;

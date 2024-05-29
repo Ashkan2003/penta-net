@@ -12,17 +12,21 @@ const MovieLogo = ({ movieId }: Props) => {
   if (isLoadingMovieImgs) return <div className="h-[52px]"></div>;
 
   // get movie-logo file patch from the imgs array
-  const movieLogoFilePatch = movieImgs.logos[0].file_path;
+  const movieLogoFilePatch = movieImgs.logos[0]?.file_path;
 
-  return (
-    <Image
-      src={`https://image.tmdb.org/t/p/original/${movieLogoFilePatch}`}
-      unoptimized
-      width={200}
-      height={50}
-      alt="logo"
-    />
-  );
+  if (movieLogoFilePatch) {
+    return (
+      <Image
+        src={`https://image.tmdb.org/t/p/original/${movieLogoFilePatch}`}
+        unoptimized
+        width={200}
+        height={50}
+        alt="logo"
+      />
+    );
+  } else {
+    return null;
+  }
 };
 
 export default MovieLogo;

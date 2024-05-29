@@ -19,20 +19,24 @@ const MovieVideo = ({ movieId }: Props) => {
   if (!movieYoutubeVideo) {
     movieYoutubeVideo = movieVideos[0];
   }
-
-  return (
-    <div className="xl:w-[60%]">
-      <iframe
-        style={{
-          display: "block",
-          aspectRatio: "16 / 9",
-          width: "100%",
-          borderRadius: "1%",
-        }}
-        src={`https://www.youtube.com/embed/${movieYoutubeVideo.key}`}
-      />
-    </div>
-  );
+  // if the movie have a youtube video then render this,otherWise render null
+  if (movieYoutubeVideo) {
+    return (
+      <div className="xl:w-[60%]">
+        <iframe
+          style={{
+            display: "block",
+            aspectRatio: "16 / 9",
+            width: "100%",
+            borderRadius: "1%",
+          }}
+          src={`https://www.youtube.com/embed/${movieYoutubeVideo.key}`}
+        />
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default MovieVideo;
