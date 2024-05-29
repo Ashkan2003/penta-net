@@ -37,7 +37,7 @@ const MovieDetailsPage = ({ params }: Props) => {
     .toString()
     .slice(0, 2);
 
-  console.log(movieDetails);
+ 
 
   return (
     <div className="bg-[#121212]">

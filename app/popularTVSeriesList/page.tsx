@@ -36,7 +36,6 @@ export default function PopularTVSeriesListPage() {
   if (status === "error") {
     return <p>error...{error?.message}</p>;
   }
-  console.log(data?.pages, "oooooo");
 
   // combine the arrays to 1 array
   const tvSeriesList = data?.pages.reduce(

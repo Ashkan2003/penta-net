@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getMultiSearchQuery(query:string) {
+export async function getMultiSearchQuery(query: string) {
   if (query == "") {
     return [];
   }
@@ -26,9 +26,8 @@ export async function getMultiSearchQuery(query:string) {
 
   // filter throug does values that there name is undfind
   const movieAndTVArray = data.filter((item: any) => {
-    return item.name !== undefined;
+    return item.name !== undefined || item.title !== undefined;
   });
-
 
   return movieAndTVArray;
 }
