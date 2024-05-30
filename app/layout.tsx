@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // <ClerkProvider>
+    <ClerkProvider>
       <html dir="rtl" className="bg-[#1E2027]">
         <body className={IranSansWeb.variable}>
           {/* this is for custom mui theme */}
@@ -69,6 +69,6 @@ export default function RootLayout({
           </MuiCustomThemeProvider>
         </body>
       </html>
-    // </ClerkProvider>
+    </ClerkProvider>
   );
 }
