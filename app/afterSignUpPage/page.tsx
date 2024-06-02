@@ -26,6 +26,5 @@ export default async function afterSignUpPage() {
     redirect("/userProfile");
   }
 
-
-  return <div>afterSignupPage</div>
+  return <div>afterSignupPage</div>;
 }

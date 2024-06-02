@@ -23,6 +23,7 @@ export type movieDetailsType = {
   genres: { id: number; name: string }[];
   homepage: string;
   id: number;
+  imdb_id: string;
   original_language: string;
   original_title: string;
   overview: string;
@@ -30,7 +31,6 @@ export type movieDetailsType = {
   poster_path: string;
   production_companies: any;
   production_countries: any;
-
   revenue: number;
   runtime: number;
   status: string;

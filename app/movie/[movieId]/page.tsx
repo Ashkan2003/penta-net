@@ -17,6 +17,7 @@ import MovieLogo from "./MovieLogo";
 import MovieVideo from "./MovieVideo";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
 import GenresList from "@/app/components/reusable-components/GenresList";
+import axios from "axios";
 
 interface Props {
   params: { movieId: string };
@@ -29,13 +30,20 @@ const MovieDetailsPage = ({ params }: Props) => {
   );
 
   if (isLoadingMovieDetails) return <FullPageLoadingSpinner />;
-
   const movieImdbRate = Math.round(movieDetails!.vote_average * 10) / 10;
   const movieReleaseDate = movieDetails!.release_date.slice(0, 4);
   const movieDes = movieDetails?.overview.slice(0, 200);
   const moviePopularityPercent = Math.round(movieDetails!.popularity)
     .toString()
     .slice(0, 2);
+
+  const handleAddToUserMovieTVList = async () => {
+   const data=  await axios.post("/api/userMovieTVListApi", {
+      mediaType: "movie",
+      mediaTmdbId: movieDetails?.id,
+    });
+    console.log(data)
+  };
 
   return (
     <div className="bg-[#121212]">
@@ -105,7 +113,9 @@ const MovieDetailsPage = ({ params }: Props) => {
               خرید اشتراک
             </Button>
             <div className="flex justify-between w-40 ps-3">
+              {/* add to my list btn */}
               <Tooltip
+                onClick={handleAddToUserMovieTVList}
                 TransitionComponent={Zoom}
                 title="افزودن به لیست من"
                 arrow

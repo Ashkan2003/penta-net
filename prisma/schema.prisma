@@ -12,7 +12,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// the realtion bettven UserPentaNetAccount and Media is 1 to many each user in userMOvieTVList can have multipe media(movie or tvSereis)
 model UserPentaNetAccount {
-  userClerkId    String  @id
-  userCollection String?
+  userClerkId     String  @id
+  userCollection  String?
+  userMovieTVList Media[]
+}
+
+model Media {
+  id                             Int                  @id @default(autoincrement())
+  mediaType                      String
+  mediaTmdbId                    Int
+  UserPentaNetAccount            UserPentaNetAccount? @relation(fields: [userPentaNetAccountUserClerkId], references: [userClerkId])
+  userPentaNetAccountUserClerkId String?
 }

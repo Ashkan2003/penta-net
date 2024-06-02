@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 export default function AutoCompleteBox() {
   const router = useRouter();
   const { multiSearchData, isPending, mutate } = useMultiSearchQuery();
-  console.log(multiSearchData);
   // when the input value change mutate(reFetch the mutaition-fn with the new input-value)
   // so when the user changes the input-value,he will see new options
   const handleSearchQueryChange = (value: any) => {

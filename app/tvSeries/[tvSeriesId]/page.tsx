@@ -28,7 +28,7 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
     useTVSeriesDetails(Number(params.tvSeriesId));
 
   if (isLoadingTVSeriesDetails) return <FullPageLoadingSpinner />;
-
+  console.log(tvSeriesDetails, "o");
   const tvSeriesImdbRate = Math.round(tvSeriesDetails!.vote_average * 10) / 10;
   const tvSeriesReleaseDate = tvSeriesDetails!.first_air_date.slice(0, 4);
   const tvSeriesDes = tvSeriesDetails?.overview.slice(0, 200);
