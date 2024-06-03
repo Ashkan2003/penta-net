@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/db";
-import { useAuth } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+
+export async function GET(request: NextRequest) {
+  // get current user-id
+  const { userId } = auth();
+
+  const data = await prisma.media.findMany({
+    where: { userPentaNetAccountUserClerkId: userId },
+  });
+
+  return NextResponse.json(data, { status: 200 });
+}
 
 export async function POST(request: NextRequest) {
   // get the req
@@ -25,6 +35,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json("the media is in db", { status: 208 });
   }
 
+  // create a media in db related to this user
   const data = await prisma.userPentaNetAccount.update({
     where: { userClerkId: userId },
     data: {
@@ -33,5 +44,16 @@ export async function POST(request: NextRequest) {
       },
     },
   });
-  return NextResponse.json(data, { status: 201 });
+  return NextResponse.json("media successfully created", { status: 201 });
+}
+
+export async function DELETE(request: NextRequest) {
+  // get the req
+  const body = await request.json();
+
+  const data = await prisma.media.delete({
+    where: { mediaTmdbId: body.mediaTmdbId },
+  });
+
+  return NextResponse.json("media successfully deleted", { status: 200 });
 }

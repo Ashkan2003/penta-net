@@ -22,7 +22,7 @@ model UserPentaNetAccount {
 model Media {
   id                             Int                  @id @default(autoincrement())
   mediaType                      String
-  mediaTmdbId                    Int
+  mediaTmdbId                    Int                  @unique
   UserPentaNetAccount            UserPentaNetAccount? @relation(fields: [userPentaNetAccountUserClerkId], references: [userClerkId])
   userPentaNetAccountUserClerkId String?
 }
