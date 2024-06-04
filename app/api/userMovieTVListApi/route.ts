@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/db";
 import { auth } from "@clerk/nextjs/server";
 
+// get the list of related medias that user has added them into his list(userMovieTVList)
 export async function GET(request: NextRequest) {
   // get current user-id
   const { userId } = auth();
@@ -13,10 +14,11 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(data, { status: 200 });
 }
 
+// create a new item(media) for user list // user add media in his list functionality
 export async function POST(request: NextRequest) {
   // get the req
   const body = await request.json();
-
+  console.log(body,"ooooooooooooooo")
   // get current user-id
   const { userId } = auth();
 
@@ -47,6 +49,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json("media successfully created", { status: 201 });
 }
 
+// delete the media from user list
 export async function DELETE(request: NextRequest) {
   // get the req
   const body = await request.json();

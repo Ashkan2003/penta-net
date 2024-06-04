@@ -1,9 +1,7 @@
 "use client";
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
@@ -19,14 +17,14 @@ import MovieVideo from "./MovieVideo";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
 import GenresList from "@/app/components/reusable-components/GenresList";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AddToUserListBtn from "@/app/components/reusable-components/AddToUserListBtn";
 
 interface Props {
   params: { movieId: string };
 }
 
 const MovieDetailsPage = ({ params }: Props) => {
-  const [isMediaInUserList, setMediaInUserList] = useState(false);
   // fetch a single movieDetails with its id from tmdb-site. the params type is allways string so convert it to number
   const { movieDetails, isLoadingMovieDetails } = useMovieDetails(
     Number(params.movieId)
@@ -39,34 +37,6 @@ const MovieDetailsPage = ({ params }: Props) => {
   const moviePopularityPercent = Math.round(movieDetails!.popularity)
     .toString()
     .slice(0, 2);
-
-  const handleAddToUserMovieTVList = async () => {
-    const { data: userMovieTVList } = await axios.get(
-      "/api/userMovieTVListApi"
-    );
-
-    const matchedMedia = userMovieTVList.find((media) => {
-      return media.mediaTmdbId == movieDetails!.id;
-    });
-    if (matchedMedia) {
-      const data = await axios.delete("/api/userMovieTVListApi", {
-        data: {
-          mediaTmdbId: movieDetails?.id,
-        },
-      });
-      if (data.status == 200) {
-        setMediaInUserList(false);
-      }
-    } else {
-      const data = await axios.post("/api/userMovieTVListApi", {
-        mediaType: "movie",
-        mediaTmdbId: movieDetails?.id,
-      });
-      if (data.status == 201) {
-        setMediaInUserList(true);
-      }
-    }
-  };
 
   return (
     <div className="bg-[#121212]">
@@ -137,22 +107,7 @@ const MovieDetailsPage = ({ params }: Props) => {
             </Button>
             <div className="flex justify-between w-40 ps-3">
               {/* add to my list btn */}
-              <Tooltip
-                onClick={handleAddToUserMovieTVList}
-                TransitionComponent={Zoom}
-                title={
-                  isMediaInUserList ? "حذف از لیست من" : "افزودن به لیست من"
-                }
-                arrow
-              >
-                <IconButton color="success">
-                  {isMediaInUserList ? (
-                    <RoundedBtn color="primary" Icon={CheckCircleIcon} />
-                  ) : (
-                    <RoundedBtn color="primary" Icon={AddRoundedIcon} />
-                  )}
-                </IconButton>
-              </Tooltip>
+              <AddToUserListBtn movieId={movieDetails?.id!} />
               <Tooltip TransitionComponent={Zoom} title="دوست داشتم" arrow>
                 <IconButton color="success">
                   <RoundedBtn color="primary" Icon={ThumbUpAltRoundedIcon} />
