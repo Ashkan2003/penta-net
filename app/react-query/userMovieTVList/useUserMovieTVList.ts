@@ -1,7 +1,5 @@
-import { getMovieVideos } from "@/app/services/movie/getMovieVideos";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 
 export const useUserMovieTVList = () => {
   const {

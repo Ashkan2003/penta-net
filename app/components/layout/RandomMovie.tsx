@@ -14,6 +14,7 @@ import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
 import FullPageLoadingSpinner from "../reusable-components/FullPageLoadingSpinner";
 import GenresList from "../reusable-components/GenresList";
+import { ToggleMediaToUserListBtn } from "../reusable-components/AddToUserListBtn";
 
 interface Props {
   randomMovieId: number;
@@ -100,15 +101,11 @@ const RandomMovie = ({ randomMovieId }: Props) => {
               خرید اشتراک
             </Button>
             <div className="flex justify-between w-40 ps-3">
-              <Tooltip
-                TransitionComponent={Zoom}
-                title="افزودن به لیست من"
-                arrow
-              >
-                <IconButton color="success">
-                  <RoundedBtn color="primary" Icon={AddRoundedIcon} />
-                </IconButton>
-              </Tooltip>
+              {/* toggle btn */}
+              <ToggleMediaToUserListBtn
+                mediaType="movie"
+                mediaTmdbId={movieDetails?.id!}
+              />
               <Tooltip TransitionComponent={Zoom} title="دوست داشتم" arrow>
                 <IconButton color="success">
                   <RoundedBtn color="primary" Icon={ThumbUpAltRoundedIcon} />

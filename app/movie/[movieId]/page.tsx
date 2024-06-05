@@ -16,9 +16,7 @@ import MovieLogo from "./MovieLogo";
 import MovieVideo from "./MovieVideo";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
 import GenresList from "@/app/components/reusable-components/GenresList";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import AddToUserListBtn from "@/app/components/reusable-components/AddToUserListBtn";
+import { ToggleMediaToUserListBtn } from "@/app/components/reusable-components/AddToUserListBtn";
 
 interface Props {
   params: { movieId: string };
@@ -106,8 +104,11 @@ const MovieDetailsPage = ({ params }: Props) => {
               خرید اشتراک
             </Button>
             <div className="flex justify-between w-40 ps-3">
-              {/* add to my list btn */}
-              <AddToUserListBtn movieId={movieDetails?.id!} />
+              {/* toggleBtn */}
+              <ToggleMediaToUserListBtn
+                mediaType="movie"
+                mediaTmdbId={movieDetails?.id!}
+              />
               <Tooltip TransitionComponent={Zoom} title="دوست داشتم" arrow>
                 <IconButton color="success">
                   <RoundedBtn color="primary" Icon={ThumbUpAltRoundedIcon} />

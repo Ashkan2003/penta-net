@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/db";
 import { auth } from "@clerk/nextjs/server";
+import { miniUserMovieTVListType } from "@/app/types/userMovieTVListTypes";
 
 // get the list of related medias that user has added them into his list(userMovieTVList)
 export async function GET(request: NextRequest) {
   // get current user-id
   const { userId } = auth();
 
+  // find all medias related to this userId
   const data = await prisma.media.findMany({
     where: { userPentaNetAccountUserClerkId: userId },
   });
@@ -17,8 +19,8 @@ export async function GET(request: NextRequest) {
 // create a new item(media) for user list // user add media in his list functionality
 export async function POST(request: NextRequest) {
   // get the req
-  const body = await request.json();
-  console.log(body,"ooooooooooooooo")
+  const body: miniUserMovieTVListType = await request.json();
+
   // get current user-id
   const { userId } = auth();
 
@@ -27,13 +29,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json("the user is not signed in", { status: 401 });
   }
 
-  // get all the medias(movie or tv) from db with this tmdb-id
-  const medias = await prisma.media.findMany({
+  // get  the media(movie or tv) from db with this tmdb-id
+  const media = await prisma.media.findUnique({
     where: { mediaTmdbId: body.mediaTmdbId },
   });
 
-  // if the array has lenght it means that the prisma has found a media with the same tmdb-id so dont creat it becuze of duplicate
-  if (medias.length != 0) {
+  // if medai it means that the prisma has found a media with the same tmdb-id so dont creat it becuze of duplicate
+  if (media) {
     return NextResponse.json("the media is in db", { status: 208 });
   }
 
@@ -52,8 +54,9 @@ export async function POST(request: NextRequest) {
 // delete the media from user list
 export async function DELETE(request: NextRequest) {
   // get the req
-  const body = await request.json();
+  const body: miniUserMovieTVListType = await request.json();
 
+  // delete the media where its id is == mediaTmdbId
   const data = await prisma.media.delete({
     where: { mediaTmdbId: body.mediaTmdbId },
   });

@@ -1,6 +1,5 @@
 "use client";
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
@@ -11,11 +10,12 @@ import { Button, IconButton, Tooltip, Typography } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
 
+import { ToggleMediaToUserListBtn } from "@/app/components/reusable-components/AddToUserListBtn";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
+import GenresList from "@/app/components/reusable-components/GenresList";
 import { useTVSeriesDetails } from "@/app/react-query/tvSeries/useTVSeriesDetails";
 import TVSeriesImgs from "./TVSeriesImgs";
 import TVSeriesLogo from "./TVSeriesLogo";
-import GenresList from "@/app/components/reusable-components/GenresList";
 import TVSeriesVideo from "./TVSeriesVideo";
 
 interface Props {
@@ -28,7 +28,6 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
     useTVSeriesDetails(Number(params.tvSeriesId));
 
   if (isLoadingTVSeriesDetails) return <FullPageLoadingSpinner />;
-  console.log(tvSeriesDetails, "o");
   const tvSeriesImdbRate = Math.round(tvSeriesDetails!.vote_average * 10) / 10;
   const tvSeriesReleaseDate = tvSeriesDetails!.first_air_date.slice(0, 4);
   const tvSeriesDes = tvSeriesDetails?.overview.slice(0, 200);
@@ -103,15 +102,11 @@ const TVSeriesDetailsPage = ({ params }: Props) => {
               خرید اشتراک
             </Button>
             <div className="flex justify-between w-40 ps-3">
-              <Tooltip
-                TransitionComponent={Zoom}
-                title="افزودن به لیست من"
-                arrow
-              >
-                <IconButton color="success">
-                  <RoundedBtn color="primary" Icon={AddRoundedIcon} />
-                </IconButton>
-              </Tooltip>
+              {/* toggleBtn */}
+              <ToggleMediaToUserListBtn
+                mediaType="tvSeries"
+                mediaTmdbId={tvSeriesDetails.id}
+              />
               <Tooltip TransitionComponent={Zoom} title="دوست داشتم" arrow>
                 <IconButton color="success">
                   <RoundedBtn color="primary" Icon={ThumbUpAltRoundedIcon} />

@@ -62,7 +62,7 @@ export default function RootLayout({
                     <main className="bg-[#1E2027]">{children}</main>
                   </Box>
                 </Box>
-                <Toaster />
+                <Toaster  />
                 <ReactQueryDevtools position="left" initialIsOpen={false} />
               </ReactQueryProvider>
             </MuiRtlAndAppRouterCacheProvider>

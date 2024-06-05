@@ -1,47 +1,70 @@
-import { IconButton, Tooltip, Zoom } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import RoundedBtn from "./RoundedBtn";
+import { useAddMediaToUserList } from "@/app/react-query/userMovieTVList/useAddMediaToUserList";
+import { useDeleteMediaFromUserList } from "@/app/react-query/userMovieTVList/useDeleteMediaFromUserList";
+import { useUserMovieTVList } from "@/app/react-query/userMovieTVList/useUserMovieTVList";
+import { miniUserMovieTVListType } from "@/app/types/userMovieTVListTypes";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import axios from "axios";
+import SyncIcon from "@mui/icons-material/Sync";
+import { IconButton, Tooltip, Zoom } from "@mui/material";
 import { Media } from "@prisma/client";
-import { useUserMovieTVList } from "@/app/react-query/userMovieTVList/useUserMovieTVList";
-import { useAddMediaFromUserList } from "@/app/react-query/userMovieTVList/useAddMediaToUserList";
-import { useDeleteMediaFromUserList } from "@/app/react-query/userMovieTVList/useDeleteMediaFromUserList";
+import RoundedBtn from "./RoundedBtn";
 
-interface Props {
-  movieId: number;
-  //   userMovieTVList: Media[];
-}
+// extend the props-types from miniUserMovieTVListType
+interface Props extends miniUserMovieTVListType {}
 
-const AddToUserListBtn = ({ movieId }: Props) => {
+export const ToggleMediaToUserListBtn = ({ mediaType, mediaTmdbId }: Props) => {
+  // get the  list of userMovieTVList
   const { userMovieTVList, isLoadingUserMovieTVList } = useUserMovieTVList();
-  const { mutate, isPending } = useAddMediaFromUserList();
-  const { isPending: isPendingDelete, mutate: deleteMutate } =
+
+  // get add-mutation from react-query
+  const { addMediaToUserList, isPendingToAdd } = useAddMediaToUserList();
+
+  // get delete-mutation from react-query
+  const { deleteMediaFromUserList, isPendingToDelete } =
     useDeleteMediaFromUserList();
 
-  if (isLoadingUserMovieTVList) return null;
-  if (isPendingDelete) return null;
+  // if is loading the userMovieTVList render a syncIcon
+  if (isLoadingUserMovieTVList)
+    return (
+      <Tooltip TransitionComponent={Zoom} title="loading" arrow>
+        <IconButton color="success">
+          <RoundedBtn color="primary" Icon={SyncIcon} />
+        </IconButton>
+      </Tooltip>
+    );
 
-  const matchedMedia: Media[] = userMovieTVList.find((media) => {
-    return media.mediaTmdbId == movieId;
+  const matchedMedia = userMovieTVList.find((media: Media) => {
+    return media.mediaTmdbId == mediaTmdbId;
   });
-  console.log(matchedMedia, "ldgh");
-  const handleAddToUserMovieTVList = async () => {
+
+  // the toggle-btn(add or delete) functionality
+  const handleToggleToUserMovieTVList = async () => {
+    // if the metchedMedia is true so the media is in db so if user toggle then delete the media
     if (matchedMedia) {
-      deleteMutate({ mediaId: movieId, mediaType: "movie" });
+      deleteMediaFromUserList({
+        mediaType: mediaType,
+        mediaTmdbId: mediaTmdbId,
+      });
     } else {
-      mutate({ mediaId: movieId, mediaType: "movie" });
+      // if the metchedMedia is false so the media is not in db so if user toggle then add the media
+      addMediaToUserList({
+        mediaType: mediaType,
+        mediaTmdbId: mediaTmdbId,
+      });
     }
   };
+
   return (
     <Tooltip
-      onClick={handleAddToUserMovieTVList}
+      onClick={handleToggleToUserMovieTVList}
       TransitionComponent={Zoom}
       title={matchedMedia ? "حذف از لیست من" : "افزودن به لیست من"}
       arrow
     >
-      <IconButton disabled={isPending} color="success">
+      <IconButton
+        disabled={isPendingToAdd || isPendingToDelete}
+        color="success"
+      >
         {matchedMedia ? (
           <RoundedBtn color="primary" Icon={CheckCircleIcon} />
         ) : (
@@ -51,5 +74,3 @@ const AddToUserListBtn = ({ movieId }: Props) => {
     </Tooltip>
   );
 };
-
-export default AddToUserListBtn;
