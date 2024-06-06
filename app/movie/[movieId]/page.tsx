@@ -16,7 +16,7 @@ import MovieLogo from "./MovieLogo";
 import MovieVideo from "./MovieVideo";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
 import GenresList from "@/app/components/reusable-components/GenresList";
-import { ToggleMediaToUserListBtn } from "@/app/components/reusable-components/AddToUserListBtn";
+import { ToggleMediaToUserListBtn } from "@/app/components/reusable-components/ToggleMediaToUserListBtn";
 
 interface Props {
   params: { movieId: string };

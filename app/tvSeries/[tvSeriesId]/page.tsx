@@ -10,13 +10,13 @@ import { Button, IconButton, Tooltip, Typography } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
 
-import { ToggleMediaToUserListBtn } from "@/app/components/reusable-components/AddToUserListBtn";
 import FullPageLoadingSpinner from "@/app/components/reusable-components/FullPageLoadingSpinner";
 import GenresList from "@/app/components/reusable-components/GenresList";
 import { useTVSeriesDetails } from "@/app/react-query/tvSeries/useTVSeriesDetails";
 import TVSeriesImgs from "./TVSeriesImgs";
 import TVSeriesLogo from "./TVSeriesLogo";
 import TVSeriesVideo from "./TVSeriesVideo";
+import { ToggleMediaToUserListBtn } from "@/app/components/reusable-components/ToggleMediaToUserListBtn";
 
 interface Props {
   params: { tvSeriesId: string };

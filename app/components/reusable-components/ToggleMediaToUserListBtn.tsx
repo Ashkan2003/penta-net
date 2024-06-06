@@ -1,3 +1,4 @@
+"use client";
 import { useAddMediaToUserList } from "@/app/react-query/userMovieTVList/useAddMediaToUserList";
 import { useDeleteMediaFromUserList } from "@/app/react-query/userMovieTVList/useDeleteMediaFromUserList";
 import { useUserMovieTVList } from "@/app/react-query/userMovieTVList/useUserMovieTVList";
@@ -8,11 +9,16 @@ import SyncIcon from "@mui/icons-material/Sync";
 import { IconButton, Tooltip, Zoom } from "@mui/material";
 import { Media } from "@prisma/client";
 import RoundedBtn from "./RoundedBtn";
+import { useUser } from "@clerk/nextjs";
+import toast from "react-hot-toast";
 
 // extend the props-types from miniUserMovieTVListType
 interface Props extends miniUserMovieTVListType {}
 
 export const ToggleMediaToUserListBtn = ({ mediaType, mediaTmdbId }: Props) => {
+  // get the current-user // if the user doesnt signed in we cant store the media in db
+  const { isLoaded, isSignedIn } = useUser();
+
   // get the  list of userMovieTVList
   const { userMovieTVList, isLoadingUserMovieTVList } = useUserMovieTVList();
 
@@ -22,9 +28,8 @@ export const ToggleMediaToUserListBtn = ({ mediaType, mediaTmdbId }: Props) => {
   // get delete-mutation from react-query
   const { deleteMediaFromUserList, isPendingToDelete } =
     useDeleteMediaFromUserList();
-
   // if is loading the userMovieTVList render a syncIcon
-  if (isLoadingUserMovieTVList)
+  if (isLoadingUserMovieTVList || !isLoaded)
     return (
       <Tooltip TransitionComponent={Zoom} title="loading" arrow>
         <IconButton color="success">
@@ -39,6 +44,11 @@ export const ToggleMediaToUserListBtn = ({ mediaType, mediaTmdbId }: Props) => {
 
   // the toggle-btn(add or delete) functionality
   const handleToggleToUserMovieTVList = async () => {
+    if (!isSignedIn) {
+      toast.error("لطفا برای اضافه کردن به لیست وارد حساب کاربری خود شوید.");
+      return null;
+    }
+
     // if the metchedMedia is true so the media is in db so if user toggle then delete the media
     if (matchedMedia) {
       deleteMediaFromUserList({

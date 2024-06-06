@@ -2,7 +2,6 @@
 import RoundedBtn from "@/app/components/reusable-components/RoundedBtn";
 import MovieLogo from "@/app/movie/[movieId]/MovieLogo";
 import { useMovieDetails } from "@/app/react-query/movie/useMovieDetails";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
@@ -14,7 +13,7 @@ import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
 import FullPageLoadingSpinner from "../reusable-components/FullPageLoadingSpinner";
 import GenresList from "../reusable-components/GenresList";
-import { ToggleMediaToUserListBtn } from "../reusable-components/AddToUserListBtn";
+import { ToggleMediaToUserListBtn } from "../reusable-components/ToggleMediaToUserListBtn";
 
 interface Props {
   randomMovieId: number;
