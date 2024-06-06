@@ -1,3 +1,4 @@
+import { Media } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -6,7 +7,7 @@ export const useUserMovieTVList = () => {
     isLoading: isLoadingUserMovieTVList,
     error,
     data: userMovieTVList,
-  } = useQuery({
+  } = useQuery<Media[]>({
     queryFn: async () =>
       await axios.get("/api/userMovieTVListApi").then((res) => res.data),
     queryKey: ["userMovieTVList"], // the queryKey is a unic key to identify the data in the cash
