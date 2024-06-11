@@ -33,7 +33,7 @@ const RandomMovie = ({ randomMovieId }: Props) => {
     .slice(0, 2);
 
   return (
-    <div className="bg-[#121212]">
+    <div className="bg-[#121212] h-[91vh]">
       {/* movie info  */}
       <div className="relative overflow-hidden h-[700px] xs:h-[550px] sm:h-[550px] md:h-[550px] ">
         {/* movie ing */}

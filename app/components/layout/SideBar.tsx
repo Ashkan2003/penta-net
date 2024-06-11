@@ -50,16 +50,6 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
     icon: <FilterAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
-    title: "تاریخچه",
-    href: "/ooooooooooo",
-    icon: <HistoryIcon fontSize="small" sx={{ color: "success.main" }} />,
-  },
-  {
-    title: "ذخیره شده ها",
-    href: "/ppppppppppp",
-    icon: <BookmarkIcon fontSize="small" sx={{ color: "success.main" }} />,
-  },
-  {
     title: "لیست های من",
     href: "/userList",
     icon: (
@@ -70,13 +60,24 @@ const menuListArray: { title: string; href: string; icon: any }[] = [
     ),
   },
   {
+    title: "تاریخچه",
+    href: "/underConstructionPage",
+    icon: <HistoryIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+  {
+    title: "ذخیره شده ها",
+    href: "/underConstructionPage",
+    icon: <BookmarkIcon fontSize="small" sx={{ color: "success.main" }} />,
+  },
+
+  {
     title: "دانلود ها",
-    href: "/ddddddddddddddd",
+    href: "/underConstructionPage",
     icon: <SaveAltIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
     title: "تنظیمات",
-    href: "/sssssssssssss",
+    href: "/underConstructionPage",
     icon: <SettingsIcon fontSize="small" sx={{ color: "success.main" }} />,
   },
   {
