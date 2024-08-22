@@ -16,8 +16,7 @@ discover movies ditails<br>
 
 # some imgs from site
 
-![Untitledkk](https://github.com/user-attachments/assets/7b9494be-f3cd-48d6-8048-fe298f81af6a)
-<hr>
+![Untitledkk](https://github.com/user-attachments/assets/7b9494be-f3cd-48d6-8048-fe298f81af6a)<hr>
 ![Untitlefgd](https://github.com/user-attachments/assets/2d06b90c-df10-4b36-b8ae-e119caa3dd87)
 
 
