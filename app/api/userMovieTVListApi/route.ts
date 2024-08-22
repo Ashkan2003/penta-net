@@ -7,8 +7,7 @@ import { miniUserMovieTVListType } from "@/app/types/userMovieTVListTypes";
 export async function GET(request: NextRequest) {
   // get current user-id
   const { userId } = auth();
-
-  // find all medias related to this userId
+ // find all medias related to this userId
   const data = await prisma.media.findMany({
     where: { userPentaNetAccountUserClerkId: userId },
   });
