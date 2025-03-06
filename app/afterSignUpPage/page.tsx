@@ -28,10 +28,22 @@
 
 //   return <div>afterSignupPage</div>;
 // }
-import React from "react";
+import { Paper, Typography } from "@mui/material";
 
-const page = () => {
-  return <div>page</div>;
+const AfterSignupPage = () => {
+  return (
+    <Paper
+      elevation={3}
+      sx={{
+        textAlign: "center",
+        bgcolor: "secondary.dark",
+        margin: "1rem",
+        padding: "50px",
+      }}
+    >
+      <Typography>ثبت نام شما با موفقیت انجام شد</Typography>
+    </Paper>
+  );
 };
 
-export default page;
+export default AfterSignupPage;
