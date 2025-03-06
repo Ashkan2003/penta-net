@@ -6,6 +6,7 @@ export const useUserMovieTVList = () => {
   const {
     isLoading: isLoadingUserMovieTVList,
     error,
+    status,
     data: userMovieTVList,
   } = useQuery<Media[]>({
     queryFn: async () =>
@@ -17,5 +18,6 @@ export const useUserMovieTVList = () => {
     userMovieTVList,
     isLoadingUserMovieTVList,
     error,
+    status
   };
 };

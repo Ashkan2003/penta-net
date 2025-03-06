@@ -13,13 +13,14 @@ export default function UserListPage() {
   const [userStoredList, setUserStoredList] = useState<userStoredListType[]>();
 
   // get userMovieTVList from react query
-  const { isLoadingUserMovieTVList, userMovieTVList } = useUserMovieTVList();
+  const { isLoadingUserMovieTVList, userMovieTVList, status } =
+    useUserMovieTVList();
 
   useEffect(() => {
-    if (isLoadingUserMovieTVList) return;
+    if (status == "error") return;
 
     const handleData = async () => {
-      const list: userStoredListType[] = await Promise.all(
+      const list: userStoredListType[] =userMovieTVList ? await Promise.all(
         userMovieTVList!.map(async (media) => {
           if (media.mediaType === "movie") {
             return getMovieDetails(media.mediaTmdbId).then((res) => ({
@@ -33,11 +34,11 @@ export default function UserListPage() {
             }));
           }
         })
-      );
+      ) : []
       setUserStoredList(list);
     };
     handleData();
-  }, [isLoadingUserMovieTVList, userMovieTVList]);
+  }, [isLoadingUserMovieTVList, userMovieTVList, status]);
 
   console.log(userStoredList);
 
