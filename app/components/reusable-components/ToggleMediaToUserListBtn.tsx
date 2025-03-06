@@ -23,13 +23,13 @@ export const ToggleMediaToUserListBtn = ({ mediaType, mediaTmdbId }: Props) => {
   const { userMovieTVList, isLoadingUserMovieTVList } = useUserMovieTVList();
 
   // get add-mutation from react-query
-  const { addMediaToUserList, isPendingToAdd } = useAddMediaToUserList();
+  const { addMediaToUserList, isPendingToAdd,status } = useAddMediaToUserList();
 
   // get delete-mutation from react-query
   const { deleteMediaFromUserList, isPendingToDelete } =
     useDeleteMediaFromUserList();
   // if is loading the userMovieTVList render a syncIcon
-  if (isLoadingUserMovieTVList || !isLoaded)
+  if (isLoadingUserMovieTVList || !isLoaded || status=="pending")
     return (
       <Tooltip TransitionComponent={Zoom} title="loading" arrow>
         <IconButton color="success">
@@ -38,7 +38,7 @@ export const ToggleMediaToUserListBtn = ({ mediaType, mediaTmdbId }: Props) => {
       </Tooltip>
     );
 
-  const matchedMedia = userMovieTVList.find((media: Media) => {
+  const matchedMedia = userMovieTVList?.find((media: Media) => {
     return media.mediaTmdbId == mediaTmdbId;
   });
 

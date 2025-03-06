@@ -140,12 +140,10 @@ const MovieDetailsPage = ({ params }: Props) => {
       <div className="flex flex-col w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5 pt-5 gap-5">
         <p>تصاویر و جزییات فیلم</p>
         {/* movie imgs */}
-        <MovieImgs movieId={Number(params.movieId)} />
+      <MovieImgs movieId={Number(params.movieId)} />
         {/* movie trailer video */}
         <MovieVideo movieId={Number(params.movieId)} />
       </div>
-      {/* movie chat room */}
-      <MovieChatRoom />
     </div>
   );
 };

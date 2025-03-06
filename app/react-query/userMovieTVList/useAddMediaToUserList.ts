@@ -10,6 +10,7 @@ export const useAddMediaToUserList = () => {
   const {
     data,
     error,
+    status,
     mutate: addMediaToUserList,
     isPending: isPendingToAdd,
   } = useMutation({
@@ -24,5 +25,5 @@ export const useAddMediaToUserList = () => {
       toast.success("به لیست اضافه شد.");
     },
   });
-  return { addMediaToUserList, isPendingToAdd };
+  return { addMediaToUserList, isPendingToAdd,status };
 };
