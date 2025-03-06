@@ -16,8 +16,8 @@ discover movies ditails<br>
 
 # some imgs from site
 
-![pg1](https://github.com/Ashkan2003/tech-trader/assets/125794999/44860f41-25f1-4732-bab1-7623ddeab6c1)<hr>
-![pg8](https://github.com/Ashkan2003/tech-trader/assets/125794999/1e6c13e1-fd16-4b3c-b6ce-075e230aaf4e)
+![Untitledkk](https://github.com/user-attachments/assets/7b9494be-f3cd-48d6-8048-fe298f81af6a)<hr>
+![Untitlefgd](https://github.com/user-attachments/assets/2d06b90c-df10-4b36-b8ae-e119caa3dd87)
 
 
 ## Technologies:
