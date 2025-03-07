@@ -1,13 +1,12 @@
-import { withNextVideo } from "next-video/process";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     // images: {
     //     remotePatterns: [
     //         {
-              
+
     //             protocol: 'https',
     //             hostname: 'image.tmdb.org',
-            
+
     //             // port: '',
     //             pathname: '/t/p/**',
     //         }
@@ -15,4 +14,4 @@ const nextConfig = {
     // }
 };
 
-export default withNextVideo(nextConfig);
+export default nextConfig;
