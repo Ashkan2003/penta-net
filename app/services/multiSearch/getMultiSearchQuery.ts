@@ -1,3 +1,4 @@
+import defualtAxios from "@/app/utils/defualtAxios";
 import axios from "axios";
 
 // this is a http request for getting a list of movies or tvSeries based on the search-query
@@ -8,20 +9,17 @@ export async function getMultiSearchQuery(searchQuery: string) {
 
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/search/multi",
+    url: "/search/multi",
     params: {
       query: searchQuery,
       language: "en",
       sort_by: "vote_average.desc",
       include_video: "true",
     },
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.NEXT_PUBLIC_TMDB_API,
-    },
+    
   };
 
-  const data = await axios
+  const data = await defualtAxios
     .request(options)
     .then(function (response) {
       return response.data.results;

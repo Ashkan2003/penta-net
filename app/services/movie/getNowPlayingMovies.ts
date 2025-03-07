@@ -1,17 +1,14 @@
+import defualtAxios from "@/app/utils/defualtAxios";
 import axios from "axios";
 
 // api calls (http request)
 export async function getNowPlayingMovies() {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/now_playing",
+    url: "/movie/now_playing",
     params: { language: "fa-IR", include_video: "true" },
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.NEXT_PUBLIC_TMDB_API,
-    },
   };
-  const data = await axios
+  const data = await defualtAxios
     .request(options)
     .then((res) => {
       return res.data.results;

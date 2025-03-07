@@ -1,3 +1,4 @@
+import defualtAxios from "@/app/utils/defualtAxios";
 import axios from "axios";
 
 export async function getInfiniteMovie(props: any) {
@@ -5,14 +6,11 @@ export async function getInfiniteMovie(props: any) {
   // pageParam is the number of page we want // with inf-scroll its value incrise
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/popular",
+    url: "/movie/popular",
     params: { language: "fa-IR", page: props.pageParam },
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.NEXT_PUBLIC_TMDB_API,
-    },
+   
   };
-  const data = await axios
+  const data = await defualtAxios
     .request(options)
     .then(function (response) {
       return response.data.results;

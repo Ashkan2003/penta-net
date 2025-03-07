@@ -1,16 +1,13 @@
+import defualtAxios from "@/app/utils/defualtAxios";
 import axios from "axios";
 
 export async function getMovieImgs(movieId: number) {
   const options = {
     method: "GET",
-    url: `https://api.themoviedb.org/3/movie/${movieId}/images`,
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.NEXT_PUBLIC_TMDB_API,
-    },
+    url: `/movie/${movieId}/images`,
   };
 
-  const data = await axios
+  const data = await defualtAxios
     .request(options)
     .then(function (response) {
       return response.data;

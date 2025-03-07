@@ -12,7 +12,7 @@ const MovieLogo = ({ movieId }: Props) => {
   if (isLoadingMovieImgs) return <div className="h-[52px]"></div>;
 
   // get movie-logo file patch from the imgs array
-  const movieLogoFilePatch = movieImgs.logos[0]?.file_path;
+  const movieLogoFilePatch = movieImgs?.logos[0]?.file_path;
 
   if (movieLogoFilePatch) {
     return (

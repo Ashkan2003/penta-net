@@ -26,7 +26,7 @@ const MovieImgs = ({ movieId }: Props) => {
     );
 
   // get backdropImgs only the count of "SHOWEN_IMGS_TO_USER" from array
-  const moviebackdropImgs = movieImgs.backdrops.filter(
+  const moviebackdropImgs = movieImgs?.backdrops.filter(
     (backdrop: any, index: number) => {
       if (index < SHOWEN_IMGS_TO_USER) {
         return backdrop;
@@ -35,7 +35,7 @@ const MovieImgs = ({ movieId }: Props) => {
   );
 
   // get backdropImgs-file path and store them into the arry
-  const movieImgsFilePath = moviebackdropImgs.map((img: any) => {
+  const movieImgsFilePath = moviebackdropImgs?.map((img: any) => {
     return img.file_path;
   });
 
@@ -68,7 +68,7 @@ const MovieImgs = ({ movieId }: Props) => {
       }}
       className="h-40 w-[280px] xs:w-[370px] !sm:w-[450px] md:w-[600px] lg:w-[700px] xl:w-[1000px] 2xl:w-[1240px] "
     >
-      {movieImgsFilePath.map((imgSrc: string, index: number) => (
+      {movieImgsFilePath?.map((imgSrc: string, index: number) => (
         <SwiperSlide key={index}>
           <Image
             src={`https://image.tmdb.org/t/p/original${imgSrc}`}

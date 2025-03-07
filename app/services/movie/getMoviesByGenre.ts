@@ -1,3 +1,4 @@
+import defualtAxios from "@/app/utils/defualtAxios";
 import axios from "axios";
 
 export type genreType =
@@ -26,7 +27,7 @@ export type genreType =
 export async function getMoviesByGenre(genre: genreType) {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/discover/movie",
+    url: "/discover/movie",
     params: {
       include_adult: "false",
       include_video: "false",
@@ -35,13 +36,9 @@ export async function getMoviesByGenre(genre: genreType) {
       sort_by: "popularity.desc",
       with_genres: genre.split(",").at(1),
     },
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.NEXT_PUBLIC_TMDB_API,
-    },
   };
 
-  const data = await axios
+  const data = await defualtAxios
     .request(options)
     .then(function (response) {
       return response.data.results;
