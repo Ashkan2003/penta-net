@@ -34,7 +34,7 @@ export default function MovieCard({ movie }: Props) {
             src={`https://image.tmdb.org/t/p/original${movie.poster_path!}`}
             unoptimized // this is nesesary for not nextjs complane aboat site
             alt="movie-pic"
-            width={250}
+            width={280}
             height={200}
             // fill
             // style={{ objectFit: "contain" }}
