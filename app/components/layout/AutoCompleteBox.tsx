@@ -1,7 +1,15 @@
 "use client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Box, ListItem, Popper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  ListItem,
+  Popper,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useMultiSearchQuery } from "@/app/react-query/search/useMultiSearchQuery";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,6 +17,8 @@ import { useRouter } from "next/navigation";
 
 // in this component the option is the (tv or movie or person)-details.
 export default function AutoCompleteBox() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const router = useRouter();
   const { multiSearchData, isPending, mutate } = useMultiSearchQuery();
   // when the input value change mutate(reFetch the mutaition-fn with the new input-value)
@@ -35,11 +45,13 @@ export default function AutoCompleteBox() {
       }}
       sx={{
         bgcolor: "secondary.main",
-        borderRadius: "50px",
+        borderRadius: isMobile ? "10px" : "50px",
         ".MuiAutocomplete-inputRoot": {
-          borderRadius: "50px",
+          borderRadius: isMobile ? "10px" : "50px",
         },
-        width: { xs: "200px", sm: "210px", md: "350px", lg: "400px" },
+        width: isMobile
+          ? "100%"
+          : { xs: "200px", sm: "210px", md: "350px", lg: "400px" },
       }}
       renderInput={(params) => (
         <TextField
