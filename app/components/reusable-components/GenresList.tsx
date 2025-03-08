@@ -6,7 +6,7 @@ interface Props {
 
 const GenresList = ({ genres }: Props) => {
   return (
-    <Stack flexWrap="wrap" direction="row" alignItems="center" spacing={1}>
+    <Stack flexWrap="wrap" direction="row" alignItems="center" gap={1} >
       <Typography>ژانرها</Typography>
       {genres.map((genre) => (
         <Chip label={genre.name} key={genre.id} clickable color="error" />

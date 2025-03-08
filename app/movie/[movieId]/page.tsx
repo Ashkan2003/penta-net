@@ -7,9 +7,11 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import ThumbDownRoundedIcon from "@mui/icons-material/ThumbDownRounded";
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import WysiwygRoundedIcon from "@mui/icons-material/WysiwygRounded";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button, IconButton, Tooltip, Typography } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import MovieChatRoom from "./MovieChatRoom";
 import MovieImgs from "./MovieImgs";
 import MovieLogo from "./MovieLogo";
@@ -23,6 +25,7 @@ interface Props {
 }
 
 const MovieDetailsPage = ({ params }: Props) => {
+  const router = useRouter();
   // fetch a single movieDetails with its id from tmdb-site. the params type is allways string so convert it to number
   const { movieDetails, isLoadingMovieDetails } = useMovieDetails(
     Number(params.movieId)
@@ -42,7 +45,7 @@ const MovieDetailsPage = ({ params }: Props) => {
       <div className="relative overflow-hidden h-[700px] xs:h-[550px] sm:h-[550px] md:h-[550px] ">
         {/* movie ing */}
         <Image
-          className=" absolute bg-gradient-to-br  from-[#00000000] to-[#000000d5] "
+          className="absolute bg-gradient-to-br from-[#00000000] to-[#000000d5]"
           src={`https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path}`}
           alt="poster"
           fill
@@ -50,7 +53,20 @@ const MovieDetailsPage = ({ params }: Props) => {
           unoptimized
         />
         {/* hover shadow style */}
-        <div className="absolute w-full h-full bg-gradient-to-b from-[#ffffff00] to-[#121212] " />
+        <div className="absolute w-full h-full bg-gradient-to-b from-[#ffffff00] to-[#121212]" />
+
+        {/* Back button */}
+        <div className="absolute top-20 left-4 sm:top-24 sm:left-8 ">
+          <IconButton
+            onClick={() => router.back()}
+            className="bg-gradient-to-br from-[#f69067] to-[#f95a1b] hover:from-[#f95a1b] hover:to-[#f69067] text-white rounded-full p-1.5 sm:p-2 shadow-lg transition-all duration-300 hover:scale-105"
+            aria-label="back"
+            size="small"
+          >
+            <ArrowBackIcon className="text-[20px] sm:text-[24px]" />
+          </IconButton>
+        </div>
+
         {/* movie info */}
         <div className="absolute p-5 flex flex-col gap-6 text-white">
           {/* the film logo */}
@@ -140,7 +156,7 @@ const MovieDetailsPage = ({ params }: Props) => {
       <div className="flex flex-col w-full bg-gradient-to-b from-[#fff0] to-[#000000]  p-5 pt-5 gap-5">
         <p>تصاویر و جزییات فیلم</p>
         {/* movie imgs */}
-      <MovieImgs movieId={Number(params.movieId)} />
+        <MovieImgs movieId={Number(params.movieId)} />
         {/* movie trailer video */}
         <MovieVideo movieId={Number(params.movieId)} />
       </div>
